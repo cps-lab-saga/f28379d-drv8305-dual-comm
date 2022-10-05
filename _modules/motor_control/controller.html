@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>motor_control.controller &mdash; f28379d-drv8305-dual-comm  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> f28379d-drv8305-dual-comm
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme_link.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../controller.html">Controller</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">f28379d-drv8305-dual-comm</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>motor_control.controller</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for motor_control.controller</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">struct</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">Queue</span>
+
+<span class="kn">import</span> <span class="nn">serial</span>
+
+<span class="kn">from</span> <span class="nn">motor_control.defs</span> <span class="kn">import</span> <span class="n">ControlMode</span>
+<span class="kn">from</span> <span class="nn">motor_control.funcs</span> <span class="kn">import</span> <span class="n">crc_calculator</span><span class="p">,</span> <span class="n">find_port</span>
+
+
+<div class="viewcode-block" id="Controller"><a class="viewcode-back" href="../../controller.html#motor_control.Controller">[docs]</a><span class="k">class</span> <span class="nc">Controller</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Communicate with a f28379d used to control two motors through drv8305.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">baud</span><span class="o">=</span><span class="mi">115200</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">port_found</span> <span class="o">=</span> <span class="n">find_port</span><span class="p">(</span><span class="s2">&quot;XDS100&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">port_found</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No valid port&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">baud</span> <span class="o">=</span> <span class="n">baud</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_data</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_serial</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_read_struct</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&gt;clffffffc&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_struct</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&gt;Bf&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_checksum_struct</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;time&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;motor1_pos&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;motor1_speed&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;motor1_torque&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;motor2_pos&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;motor2_speed&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;motor2_torque&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">ControlMode</span><span class="o">.</span><span class="n">Speed_Control</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_serial</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Controller.set_control_mode"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_control_mode">[docs]</a>    <span class="k">def</span> <span class="nf">set_control_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set motor control mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param mode: Choose between speed control, position control (speed), position control (direct), bang bang, and impedance control modes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="n">subs</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">(</span><span class="s2">&quot;_|-&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;(|)|[|]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="k">for</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span> <span class="ow">in</span> <span class="n">subs</span><span class="p">:</span>
+                <span class="n">mode</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+
+            <span class="k">match</span> <span class="n">mode</span><span class="p">:</span>
+                <span class="k">case</span> <span class="s2">&quot;speed control&quot;</span> <span class="o">|</span> <span class="s2">&quot;speed&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">ControlMode</span><span class="o">.</span><span class="n">Speed_Control</span>
+                <span class="k">case</span> <span class="s2">&quot;torque control&quot;</span> <span class="o">|</span> <span class="s2">&quot;torque&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">ControlMode</span><span class="o">.</span><span class="n">Torque_Control</span>
+                <span class="k">case</span> <span class="s2">&quot;position control speed&quot;</span> <span class="o">|</span> <span class="s2">&quot;position speed&quot;</span> <span class="o">|</span> <span class="s2">&quot;pos speed&quot;</span> <span class="o">|</span> <span class="s2">&quot;position speed control&quot;</span> <span class="o">|</span> <span class="s2">&quot;pos speed control&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">ControlMode</span><span class="o">.</span><span class="n">Position_Control_Speed</span>
+                <span class="k">case</span> <span class="s2">&quot;position control direct&quot;</span> <span class="o">|</span> <span class="s2">&quot;position direct&quot;</span> <span class="o">|</span> <span class="s2">&quot;position direct control&quot;</span> <span class="o">|</span> <span class="s2">&quot;pos control direct&quot;</span> <span class="o">|</span> <span class="s2">&quot;pos direct&quot;</span> <span class="o">|</span> <span class="s2">&quot;pos direct control&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">ControlMode</span><span class="o">.</span><span class="n">Position_Control_Direct</span>
+                <span class="k">case</span> <span class="s2">&quot;bang bang control&quot;</span> <span class="o">|</span> <span class="s2">&quot;bang bang&quot;</span> <span class="o">|</span> <span class="s2">&quot;bang&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">ControlMode</span><span class="o">.</span><span class="n">Bang_Bang</span>
+                <span class="k">case</span> <span class="s2">&quot;impedance control&quot;</span> <span class="o">|</span> <span class="s2">&quot;impedance&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">ControlMode</span><span class="o">.</span><span class="n">Impedance_Control</span>
+                <span class="k">case</span> <span class="k">_</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;invalid control mode&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="p">(</span><span class="n">ControlMode</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">mode</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;invalid control mode&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x01</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span><span class="p">)))</span></div>
+
+<div class="viewcode-block" id="Controller.set_max_torque"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_max_torque">[docs]</a>    <span class="k">def</span> <span class="nf">set_max_torque</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">torque</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set maximum torque in N m.</span>
+<span class="sd">        Used in position control (speed), position control (direct), bang bang, and impedance control modes.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param torque: Torque in N m (max torque = 4.3 N m)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x02</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">torque</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_speed"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_speed">[docs]</a>    <span class="k">def</span> <span class="nf">set_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">speed</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set target speed.</span>
+<span class="sd">        Used in speed control mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param speed: Rotational speed in rad/s (max speed = 600 rad/s)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x03</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">speed</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_pos"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_pos">[docs]</a>    <span class="k">def</span> <span class="nf">set_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set target pos.</span>
+<span class="sd">        Used in position control (speed), position control (direct), bang bang, and impedance control modes.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param pos: Target angle in radians</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x04</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">pos</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_speed_p"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_speed_p">[docs]</a>    <span class="k">def</span> <span class="nf">set_speed_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set P gain for speed control.</span>
+<span class="sd">        Used in speed control and position control (speed) modes.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gain: Proportional gain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x11</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_speed_i"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_speed_i">[docs]</a>    <span class="k">def</span> <span class="nf">set_speed_i</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set I gain for speed control.</span>
+<span class="sd">        Used in speed control and position control (speed) modes.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gain: Integral gain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x12</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_speed_d"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_speed_d">[docs]</a>    <span class="k">def</span> <span class="nf">set_speed_d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set D gain for speed control.</span>
+<span class="sd">        Used in speed control and position control (speed) modes.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gain: Derivative gain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x13</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_hold_torque"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_hold_torque">[docs]</a>    <span class="k">def</span> <span class="nf">set_hold_torque</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">torque</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set constant torque.</span>
+<span class="sd">        Used in torque control mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param torque: Torque in N m (max torque = 4.3 N m)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x21</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">torque</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_pos_p"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_pos_p">[docs]</a>    <span class="k">def</span> <span class="nf">set_pos_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set P gain for position control (speed).</span>
+<span class="sd">        Used in position control (speed) mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gain: Proportional gain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x31</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_pos_i"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_pos_i">[docs]</a>    <span class="k">def</span> <span class="nf">set_pos_i</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set I gain for position control (speed).</span>
+<span class="sd">        Used in position control (speed) mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gain: Integral gain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x32</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_pos_d"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_pos_d">[docs]</a>    <span class="k">def</span> <span class="nf">set_pos_d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set D gain for position control (speed).</span>
+<span class="sd">        Used in position control (speed) mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gain: Derivative gain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x33</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_max_speed"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_max_speed">[docs]</a>    <span class="k">def</span> <span class="nf">set_max_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">speed</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set maximum target speed for position control.</span>
+<span class="sd">        Used in position control (speed) mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param speed: Rotational speed in rad/s (max speed = 600 rad/s)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x34</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">speed</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_pos_p_direct"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_pos_p_direct">[docs]</a>    <span class="k">def</span> <span class="nf">set_pos_p_direct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set P gain for position control (direct).</span>
+<span class="sd">        Used in position control (direct) mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gain: Proportional gain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x41</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_pos_i_direct"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_pos_i_direct">[docs]</a>    <span class="k">def</span> <span class="nf">set_pos_i_direct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set I gain for position control (direct).</span>
+<span class="sd">        Used in position control (direct) mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gain: Integral gain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x42</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_pos_d_direct"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_pos_d_direct">[docs]</a>    <span class="k">def</span> <span class="nf">set_pos_d_direct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set D gain for position control (direct).</span>
+<span class="sd">        Used in position control (direct) mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gain: Derivative gain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x43</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_bang_bang_torque"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_bang_bang_torque">[docs]</a>    <span class="k">def</span> <span class="nf">set_bang_bang_torque</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">torque</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set constant torque in bang-bang control.</span>
+<span class="sd">        Used in bang-bang control mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param torque: Torque in N m (max torque = 4.3 N m)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x51</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">torque</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_bang_bang_deadband"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_bang_bang_deadband">[docs]</a>    <span class="k">def</span> <span class="nf">set_bang_bang_deadband</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">deadband</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set deadband in radians in bang-bang control.</span>
+<span class="sd">        Used in bang-bang control mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param deadband: Deadband in radians</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x52</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">deadband</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_inertia"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_inertia">[docs]</a>    <span class="k">def</span> <span class="nf">set_inertia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">inertia</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set rotational inertia.</span>
+<span class="sd">        Used in impedance control mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param inertia: Inertia</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x61</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">inertia</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_damping"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_damping">[docs]</a>    <span class="k">def</span> <span class="nf">set_damping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">damping</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set rotational damping.</span>
+<span class="sd">        Used in impedance control mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param damping: Damping</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x61</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">damping</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_stiffness"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_stiffness">[docs]</a>    <span class="k">def</span> <span class="nf">set_stiffness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">stiffness</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set rotational stiffness.</span>
+<span class="sd">        Used in impedance control mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param stiffness: Stiffness</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x61</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">stiffness</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.set_zero_angle"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_zero_angle">[docs]</a>    <span class="k">def</span> <span class="nf">set_zero_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set zero angle.</span>
+<span class="sd">        Used in position control (speed), position control (direct), bang bang, and impedance control modes.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF0</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Controller.realign_motor"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.realign_motor">[docs]</a>    <span class="k">def</span> <span class="nf">realign_motor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Realign motor.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF2</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="nf">start_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_read_serial_data</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_read_serial_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span> <span class="n">baudrate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">baud</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">raw_data</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_read_struct</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+            <span class="n">unpacked_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">unpacked_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">:</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_data</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">read_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">,</span> <span class="n">unpacked_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
+                <span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">,</span> <span class="n">unpacked_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+                <span class="n">identifier</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+                <span class="n">msg_packed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">motor_no</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+                <span class="n">checksum</span> <span class="o">=</span> <span class="n">crc_calculator</span><span class="o">.</span><span class="n">calculate_checksum</span><span class="p">(</span><span class="n">identifier</span> <span class="o">+</span> <span class="n">msg_packed</span><span class="p">)</span>
+                <span class="n">checksum_packed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_checksum_struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">checksum</span><span class="p">)</span>
+                <span class="c1"># print(identifier + msg_packed + checksum_packed)</span>
+                <span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">identifier</span> <span class="o">+</span> <span class="n">msg_packed</span> <span class="o">+</span> <span class="n">checksum_packed</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_serial</span><span class="p">:</span>
+                <span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">break</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">find_port</span><span class="p">(</span><span class="s2">&quot;XDS100&quot;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Controller</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">read_data</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">set_speed</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Yeoh Wen Liang, Saga University.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
