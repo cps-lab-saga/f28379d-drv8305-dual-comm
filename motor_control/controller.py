@@ -311,7 +311,7 @@ class Controller:
                 _ = ser.readline()
             elif self.read_data:
                 self.read_queue.put(dict(zip(self.header, unpacked_data[1:-1])))
-                print(dict(zip(self.header, unpacked_data[1:-1])))
+                # print(dict(zip(self.header, unpacked_data[1:-1])))
 
             if not self._write_queue.empty():
                 identifier, motor_no, val = self._write_queue.get()
