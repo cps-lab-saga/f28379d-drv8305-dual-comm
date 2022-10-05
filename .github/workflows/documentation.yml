@@ -37,9 +37,9 @@ jobs:
         run: poetry install
         
       - name: Build documentation
-        run:  poetry run sphinx-build -b html .\docs\source .\docs\build
+        run:  poetry run sphinx-build -b html ./docs/source ./docs/build
         
       - name: Deploy documentation
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: .\docs\build
+          folder: ./docs/build
