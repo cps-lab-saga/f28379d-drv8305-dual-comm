@@ -95,7 +95,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">baud</span> <span class="o">=</span> <span class="n">baud</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">read_data</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write_to_queue</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_motor_measurement_cb</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stop_serial</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_read_struct</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">Struct</span><span class="p">(</span><span class="s2">&quot;&gt;clffffffc&quot;</span><span class="p">)</span>
@@ -114,9 +115,9 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">ControlMode</span><span class="o">.</span><span class="n">Speed_Control</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">read_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">start_serial</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_start_serial</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Controller.set_control_mode"><a class="viewcode-back" href="../../controller.html#motor_control.Controller.set_control_mode">[docs]</a>    <span class="k">def</span> <span class="nf">set_control_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -366,7 +367,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF2</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></div>
 
-    <span class="k">def</span> <span class="nf">start_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_start_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_read_serial_data</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
@@ -377,10 +378,12 @@
             <span class="n">unpacked_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">raw_data</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">unpacked_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="sa">b</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">:</span>
                 <span class="n">_</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_data</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_to_queue</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">read_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">,</span> <span class="n">unpacked_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
-                <span class="c1"># print(dict(zip(self.header, unpacked_data[1:-1])))</span>
-
+            <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_motor_measurement_cb</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">on_motor_measurement_cb</span><span class="p">(</span>
+                    <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">,</span> <span class="n">unpacked_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
                 <span class="n">identifier</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
                 <span class="n">msg_packed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">motor_no</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
@@ -391,7 +394,11 @@
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_serial</span><span class="p">:</span>
                 <span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="k">break</span></div>
+                <span class="k">break</span>
+
+    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_serial</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
