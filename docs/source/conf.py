@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath("../../"))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "f28379d-drv8305-dual-comm"
-copyright = "2022, Yeoh Wen Liang, Saga University"
+copyright = "2022, CPS Lab (Saga University)"
 author = "WL Yeoh"
 
 # -- General configuration ---------------------------------------------------
