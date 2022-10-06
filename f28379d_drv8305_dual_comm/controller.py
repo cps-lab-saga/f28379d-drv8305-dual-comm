@@ -300,6 +300,22 @@ class Controller:
         """
         self._write_queue.put((b"\xF2", motor_no, 1))
 
+    def enable_motor(self, motor_no: int):
+        """
+        Enable motor.
+
+        :param motor_no: 1 or 2
+        """
+        self._write_queue.put((b"\xF3", motor_no, 1))
+
+    def disable_motor(self, motor_no: int):
+        """
+        Disable motor.
+
+        :param motor_no: 1 or 2
+        """
+        self._write_queue.put((b"\xF3", motor_no, 0))
+
     def _start_serial(self):
         self._thread = threading.Thread(target=self._read_serial_data, daemon=True)
         self._thread.start()
