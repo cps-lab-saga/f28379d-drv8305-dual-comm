@@ -6,7 +6,7 @@ from queue import Queue
 import serial
 
 from f28379d_drv8305_dual_comm.defs import (
-    read_variables,
+    data_variables,
     _read_format,
     _write_format,
     ControlMode,
@@ -23,7 +23,7 @@ class Controller:
         if port is None:
             port_found = find_port("XDS100")
             if port_found is not None:
-                self.port = port
+                self.port = port_found
             else:
                 raise ValueError("No valid port")
         else:
@@ -36,7 +36,7 @@ class Controller:
         self.on_motor_measurement_cb = None
         self.stop_serial = False
 
-        self._header = read_variables
+        self._header = data_variables
         self._read_struct = struct.Struct(_read_format)
         self._write_struct = struct.Struct(_write_format)
         self._checksum_struct = struct.Struct(">H")
@@ -300,17 +300,19 @@ class Controller:
         self._thread.start()
 
     def _read_serial_data(self):
-        ser = serial.Serial(port=self.port, baudrate=self.baud, timeout=None)
-        while True:
+        ser = serial.Serial(port=self.port, baudrate=self.baud, timeout=1)
+        while not self.stop_serial:
             raw_data = ser.read(self._read_struct.size)
+            if not raw_data:
+                continue
             unpacked_data = self._read_struct.unpack(raw_data)
             if unpacked_data[-1] != b"\n":
                 _ = ser.readline()
             elif self.write_to_queue:
-                self.read_queue.put(dict(zip(self.header, unpacked_data[1:-1])))
+                self.read_queue.put(dict(zip(self._header, unpacked_data[1:-1])))
             elif callable(self.on_motor_measurement_cb):
                 self.on_motor_measurement_cb(
-                    dict(zip(self.header, unpacked_data[1:-1]))
+                    dict(zip(self._header, unpacked_data[1:-1]))
                 )
             if not self._write_queue.empty():
                 identifier, motor_no, val = self._write_queue.get()
@@ -319,10 +321,15 @@ class Controller:
                 checksum_packed = self._checksum_struct.pack(checksum)
                 # print(identifier + msg_packed + checksum_packed)
                 ser.write(identifier + msg_packed + checksum_packed)
+        ser.close()
 
-            if self.stop_serial:
-                ser.close()
-                break
+    def set_callback(self, cb_func):
+        self.on_motor_measurement_cb = cb_func
+        self.write_to_queue = False
+
+    def remove_callback(self):
+        self.on_motor_measurement_cb = None
+        self.write_to_queue = True
 
     def disconnect(self):
         self.stop_serial = True
@@ -330,7 +337,6 @@ class Controller:
 
 
 if __name__ == "__main__":
-    p = find_port("XDS100")
-    c = Controller(port=p)
+    c = Controller()
     c.read_data = True
     c.set_speed(1, 50)

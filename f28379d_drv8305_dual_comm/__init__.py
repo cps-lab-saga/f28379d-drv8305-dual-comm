@@ -1,2 +1,2 @@
 from .controller import Controller
-from .defs import read_variables, ControlMode
+from .defs import data_variables, sampling_rate, ControlMode

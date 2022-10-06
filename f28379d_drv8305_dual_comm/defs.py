@@ -1,6 +1,6 @@
 from enum import IntEnum
 
-read_variables = (
+data_variables = (
     "time",
     "motor1_pos",
     "motor1_speed",
@@ -12,6 +12,8 @@ read_variables = (
 
 _read_format = ">clffffffc"
 _write_format = ">Bf"
+
+sampling_rate = 100
 
 
 class ControlMode(IntEnum):
