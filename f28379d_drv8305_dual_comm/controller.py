@@ -16,7 +16,7 @@ from f28379d_drv8305_dual_comm.funcs import crc_calculator, find_port
 
 class Controller:
     """
-    Communicate with a f28379d used to control two motors through drv8305.
+    Communicate using serial with a f28379d used to control two motors through drv8305.
     """
 
     def __init__(self, port=None, baud=115200):
@@ -30,11 +30,17 @@ class Controller:
             self.port = port
 
         self.baud = baud
-        self._thread = None
 
-        self.write_to_queue = True
-        self.on_motor_measurement_cb = None
-        self.stop_serial = False
+        self.read_queue = Queue(100)
+        """
+        Data from motors are put into a read queue by default.
+        To get data from motors, either read from this queue or set a callback function.
+        """
+
+        self._thread = None
+        self._write_to_queue = True
+        self._on_motor_measurement_cb = None
+        self._stop_serial = False
 
         self._header = data_variables
         self._read_struct = struct.Struct(_read_format)
@@ -43,7 +49,6 @@ class Controller:
 
         self._selected_control_mode = ControlMode.Speed_Control
 
-        self.read_queue = Queue(100)
         self._write_queue = Queue()
         self._start_serial()
 
@@ -301,17 +306,17 @@ class Controller:
 
     def _read_serial_data(self):
         ser = serial.Serial(port=self.port, baudrate=self.baud, timeout=1)
-        while not self.stop_serial:
+        while not self._stop_serial:
             raw_data = ser.read(self._read_struct.size)
             if not raw_data:
                 continue
             unpacked_data = self._read_struct.unpack(raw_data)
             if unpacked_data[-1] != b"\n":
                 _ = ser.readline()
-            elif self.write_to_queue:
+            elif self._write_to_queue:
                 self.read_queue.put(dict(zip(self._header, unpacked_data[1:-1])))
-            elif callable(self.on_motor_measurement_cb):
-                self.on_motor_measurement_cb(
+            elif callable(self._on_motor_measurement_cb):
+                self._on_motor_measurement_cb(
                     dict(zip(self._header, unpacked_data[1:-1]))
                 )
             if not self._write_queue.empty():
@@ -324,15 +329,27 @@ class Controller:
         ser.close()
 
     def set_callback(self, cb_func):
-        self.on_motor_measurement_cb = cb_func
-        self.write_to_queue = False
+        """
+        Set callback function for when data from motors arrives.
+        The data in the form of a dictionary will be pass to this function.
+
+        :param cb_func: function with one argument
+        """
+        self._on_motor_measurement_cb = cb_func
+        self._write_to_queue = False
 
     def remove_callback(self):
-        self.on_motor_measurement_cb = None
-        self.write_to_queue = True
+        """
+        Remove callback function
+        """
+        self._on_motor_measurement_cb = None
+        self._write_to_queue = True
 
     def disconnect(self):
-        self.stop_serial = True
+        """
+        Disconnect serial.
+        """
+        self._stop_serial = True
         self._thread.join()
 
 
