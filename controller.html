@@ -42,7 +42,9 @@
 <li class="toctree-l1"><a class="reference internal" href="readme_link.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Controller</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller"><code class="docutils literal notranslate"><span class="pre">Controller</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.disable_motor"><code class="docutils literal notranslate"><span class="pre">Controller.disable_motor()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.disconnect"><code class="docutils literal notranslate"><span class="pre">Controller.disconnect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.enable_motor"><code class="docutils literal notranslate"><span class="pre">Controller.enable_motor()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.realign_motor"><code class="docutils literal notranslate"><span class="pre">Controller.realign_motor()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.remove_callback"><code class="docutils literal notranslate"><span class="pre">Controller.remove_callback()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_bang_bang_deadband"><code class="docutils literal notranslate"><span class="pre">Controller.set_bang_bang_deadband()</span></code></a></li>
@@ -105,9 +107,31 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">f28379d_drv8305_dual_comm.</span></span><span class="sig-name descname"><span class="pre">Controller</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baud</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">115200</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller" title="Permalink to this definition"></a></dt>
 <dd><p>Communicate using serial with a f28379d used to control two motors through drv8305.</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.disable_motor">
+<span class="sig-name descname"><span class="pre">disable_motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.disable_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.disable_motor" title="Permalink to this definition"></a></dt>
+<dd><p>Disable motor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.disconnect">
 <span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.disconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.disconnect" title="Permalink to this definition"></a></dt>
 <dd><p>Disconnect serial.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.enable_motor">
+<span class="sig-name descname"><span class="pre">enable_motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.enable_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.enable_motor" title="Permalink to this definition"></a></dt>
+<dd><p>Enable motor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
