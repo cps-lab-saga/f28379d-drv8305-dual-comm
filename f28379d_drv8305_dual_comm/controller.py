@@ -5,8 +5,13 @@ from queue import Queue
 
 import serial
 
-from motor_control.defs import ControlMode
-from motor_control.funcs import crc_calculator, find_port
+from f28379d_drv8305_dual_comm.defs import (
+    read_variables,
+    _read_format,
+    _write_format,
+    ControlMode,
+)
+from f28379d_drv8305_dual_comm.funcs import crc_calculator, find_port
 
 
 class Controller:
@@ -31,19 +36,10 @@ class Controller:
         self.on_motor_measurement_cb = None
         self.stop_serial = False
 
-        self._read_struct = struct.Struct(">clffffffc")
-        self._write_struct = struct.Struct(">Bf")
+        self._header = read_variables
+        self._read_struct = struct.Struct(_read_format)
+        self._write_struct = struct.Struct(_write_format)
         self._checksum_struct = struct.Struct(">H")
-
-        self.header = (
-            "time",
-            "motor1_pos",
-            "motor1_speed",
-            "motor1_torque",
-            "motor2_pos",
-            "motor2_speed",
-            "motor2_torque",
-        )
 
         self._selected_control_mode = ControlMode.Speed_Control
 
