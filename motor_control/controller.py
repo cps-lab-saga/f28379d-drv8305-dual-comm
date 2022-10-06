@@ -27,7 +27,8 @@ class Controller:
         self.baud = baud
         self._thread = None
 
-        self.read_data = True
+        self.write_to_queue = True
+        self.on_motor_measurement_cb = None
         self.stop_serial = False
 
         self._read_struct = struct.Struct(">clffffffc")
@@ -46,9 +47,9 @@ class Controller:
 
         self._selected_control_mode = ControlMode.Speed_Control
 
-        self.read_queue = Queue()
+        self.read_queue = Queue(100)
         self._write_queue = Queue()
-        self.start_serial()
+        self._start_serial()
 
     def set_control_mode(self, motor_no: int, mode: str):
         """
@@ -298,7 +299,7 @@ class Controller:
         """
         self._write_queue.put((b"\xF2", motor_no, 1))
 
-    def start_serial(self):
+    def _start_serial(self):
         self._thread = threading.Thread(target=self._read_serial_data, daemon=True)
         self._thread.start()
 
@@ -309,10 +310,12 @@ class Controller:
             unpacked_data = self._read_struct.unpack(raw_data)
             if unpacked_data[-1] != b"\n":
                 _ = ser.readline()
-            elif self.read_data:
+            elif self.write_to_queue:
                 self.read_queue.put(dict(zip(self.header, unpacked_data[1:-1])))
-                # print(dict(zip(self.header, unpacked_data[1:-1])))
-
+            elif callable(self.on_motor_measurement_cb):
+                self.on_motor_measurement_cb(
+                    dict(zip(self.header, unpacked_data[1:-1]))
+                )
             if not self._write_queue.empty():
                 identifier, motor_no, val = self._write_queue.get()
                 msg_packed = self._write_struct.pack(motor_no, val)
