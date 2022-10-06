@@ -328,6 +328,10 @@ class Controller:
                 ser.close()
                 break
 
+    def disconnect(self):
+        self.stop_serial = True
+        self._thread.join()
+
 
 if __name__ == "__main__":
     p = find_port("XDS100")
