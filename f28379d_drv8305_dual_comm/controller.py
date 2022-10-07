@@ -7,6 +7,7 @@ import serial
 
 from f28379d_drv8305_dual_comm.defs import (
     data_variables,
+    sampling_rate,
     _read_format,
     _write_format,
     ControlMode,
@@ -19,19 +20,21 @@ class Controller:
     Communicate using serial with a f28379d used to control two motors through drv8305.
     """
 
-    def __init__(self, port=None, baud=115200):
+    def __init__(self, port=None, device_name=None, baud=115200):
+
         if port is None:
-            port_found = find_port("XDS100")
+            self.device_name = "XDS100" if device_name is None else device_name
+            port_found = find_port(self.device_name)
             if port_found is not None:
                 self.port = port_found
             else:
-                raise ValueError("No valid port")
+                raise ValueError("No valid port found.")
         else:
             self.port = port
 
         self.baud = baud
 
-        self.read_queue = Queue(100)
+        self.read_queue = Queue(sampling_rate)
         """
         Data from motors are put into a read queue by default.
         To get data from motors, either read from this queue or set a callback function.
