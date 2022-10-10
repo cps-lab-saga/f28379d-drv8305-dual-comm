@@ -75,7 +75,7 @@ class Controller:
             match mode:
                 case "speed control" | "speed":
                     self._selected_control_mode = ControlMode.Speed_Control
-                case "torque control" | "torque":
+                case "torque control" | "torque" | "constant torque" | "hold torque":
                     self._selected_control_mode = ControlMode.Torque_Control
                 case "position control speed" | "position speed" | "pos speed" | "position speed control" | "pos speed control":
                     self._selected_control_mode = ControlMode.Position_Control_Speed
