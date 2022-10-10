@@ -66,8 +66,8 @@ class Controller:
         if isinstance(mode, str):
             mode = mode.lower()
             subs = [
-                ("_|-", " "),
-                ("(|)|[|]", ""),
+                (r"_|-", " "),
+                (r"\(|\)|\[|\]", ""),
             ]
             for old, new in subs:
                 mode = re.sub(old, new, mode)
