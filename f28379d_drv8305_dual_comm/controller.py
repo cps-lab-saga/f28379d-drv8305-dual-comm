@@ -1,3 +1,4 @@
+import logging
 import re
 import struct
 import threading
@@ -86,13 +87,13 @@ class Controller:
                 case "impedance control" | "impedance":
                     self._selected_control_mode = ControlMode.Impedance_Control
                 case _:
-                    print("invalid control mode")
+                    logging.error("invalid control mode")
 
         elif isinstance(mode, (ControlMode, int)):
             self._selected_control_mode = mode
 
         else:
-            print("invalid control mode")
+            logging.error("invalid control mode")
 
         self._write_queue.put((b"\x01", motor_no, float(self._selected_control_mode)))
 
@@ -274,7 +275,7 @@ class Controller:
         :param motor_no: 1 or 2
         :param damping: Damping
         """
-        self._write_queue.put((b"\x61", motor_no, damping))
+        self._write_queue.put((b"\x62", motor_no, damping))
 
     def set_stiffness(self, motor_no: int, stiffness: float):
         """
@@ -284,7 +285,7 @@ class Controller:
         :param motor_no: 1 or 2
         :param stiffness: Stiffness
         """
-        self._write_queue.put((b"\x61", motor_no, stiffness))
+        self._write_queue.put((b"\x63", motor_no, stiffness))
 
     def set_zero_angle(self, motor_no: int):
         """
