@@ -10,7 +10,7 @@ data_variables = (
     "motor2_torque",
 )
 
-_read_format = ">clffffffc"
+_read_format = ">cfffffffc"
 _write_format = ">Bf"
 
 sampling_rate = 100
