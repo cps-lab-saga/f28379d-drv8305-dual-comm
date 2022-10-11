@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Introduction" href="readme_link.html" /> 
+    <link rel="prev" title="Introduction" href="intro.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,12 +39,16 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="readme_link.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Controller</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller"><code class="docutils literal notranslate"><span class="pre">Controller</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.disable_motor"><code class="docutils literal notranslate"><span class="pre">Controller.disable_motor()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.disconnect"><code class="docutils literal notranslate"><span class="pre">Controller.disconnect()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.enable_motor"><code class="docutils literal notranslate"><span class="pre">Controller.enable_motor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.get_from_queue"><code class="docutils literal notranslate"><span class="pre">Controller.get_from_queue()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.get_pos"><code class="docutils literal notranslate"><span class="pre">Controller.get_pos()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.get_speed"><code class="docutils literal notranslate"><span class="pre">Controller.get_speed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.get_torque"><code class="docutils literal notranslate"><span class="pre">Controller.get_torque()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.realign_motor"><code class="docutils literal notranslate"><span class="pre">Controller.realign_motor()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.remove_callback"><code class="docutils literal notranslate"><span class="pre">Controller.remove_callback()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_bang_bang_deadband"><code class="docutils literal notranslate"><span class="pre">Controller.set_bang_bang_deadband()</span></code></a></li>
@@ -69,7 +73,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_speed_p"><code class="docutils literal notranslate"><span class="pre">Controller.set_speed_p()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_stiffness"><code class="docutils literal notranslate"><span class="pre">Controller.set_stiffness()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_zero_angle"><code class="docutils literal notranslate"><span class="pre">Controller.set_zero_angle()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.read_queue"><code class="docutils literal notranslate"><span class="pre">Controller.read_queue</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -135,6 +138,64 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.get_from_queue">
+<span class="sig-name descname"><span class="pre">get_from_queue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.get_from_queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.get_from_queue" title="Permalink to this definition"></a></dt>
+<dd><p>Data from motors are put into a read queue by default.
+To get data from motors, either read from this queue or set a callback function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.get_pos">
+<span class="sig-name descname"><span class="pre">get_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.get_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.get_pos" title="Permalink to this definition"></a></dt>
+<dd><p>Get current pos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>motor_no</strong> – 1 or 2</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Current position in radians</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.get_speed">
+<span class="sig-name descname"><span class="pre">get_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.get_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.get_speed" title="Permalink to this definition"></a></dt>
+<dd><p>Get current speed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>motor_no</strong> – 1 or 2</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Current speed in rad/s</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.get_torque">
+<span class="sig-name descname"><span class="pre">get_torque</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.get_torque"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.get_torque" title="Permalink to this definition"></a></dt>
+<dd><p>Get current torque.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>motor_no</strong> – 1 or 2</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Current torque in N m</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.realign_motor">
 <span class="sig-name descname"><span class="pre">realign_motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.realign_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.realign_motor" title="Permalink to this definition"></a></dt>
 <dd><p>Realign motor.</p>
@@ -148,7 +209,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.remove_callback">
 <span class="sig-name descname"><span class="pre">remove_callback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.remove_callback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.remove_callback" title="Permalink to this definition"></a></dt>
-<dd><p>Remove callback function</p>
+<dd><p>Remove callback function.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -474,13 +535,6 @@ Used in position control (speed), position control (direct), bang bang, and impe
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.read_queue">
-<span class="sig-name descname"><span class="pre">read_queue</span></span><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.read_queue" title="Permalink to this definition"></a></dt>
-<dd><p>Data from motors are put into a read queue by default.
-To get data from motors, either read from this queue or set a callback function.</p>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -489,7 +543,7 @@ To get data from motors, either read from this queue or set a callback function.
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="readme_link.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="intro.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

@@ -7,7 +7,7 @@ Documentation for  f28379d-drv8305-dual-comm
 .. toctree::
    :maxdepth: 2
 
-   readme_link
+   intro
    controller
 
 
