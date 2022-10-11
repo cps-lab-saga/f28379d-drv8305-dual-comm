@@ -150,7 +150,7 @@ To get data from motors, either read from this queue or set a callback function.
 <dd><p>Get current pos.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>motor_no</strong> – 1 or 2</p>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Current position in radians</p>
@@ -167,7 +167,7 @@ To get data from motors, either read from this queue or set a callback function.
 <dd><p>Get current speed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>motor_no</strong> – 1 or 2</p>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Current speed in rad/s</p>
@@ -184,7 +184,7 @@ To get data from motors, either read from this queue or set a callback function.
 <dd><p>Get current torque.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>motor_no</strong> – 1 or 2</p>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Current torque in N m</p>
@@ -249,7 +249,7 @@ Used in bang-bang control mode.</p>
 The data in the form of a dictionary will be pass to this function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>cb_func</strong> – function with one argument</p>
+<dd class="field-odd"><p><strong>cb_func</strong> (<em>Callable</em><em>[</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>None</em><em>]</em>) – function with one argument</p>
 </dd>
 </dl>
 </dd></dl>

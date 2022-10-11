@@ -73,6 +73,7 @@
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
 <span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">Queue</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
 
 <span class="kn">import</span> <span class="nn">serial</span>
 
@@ -468,7 +469,7 @@
                 <span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">identifier</span> <span class="o">+</span> <span class="n">msg_packed</span> <span class="o">+</span> <span class="n">checksum_packed</span><span class="p">)</span>
         <span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Controller.set_callback"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_callback">[docs]</a>    <span class="k">def</span> <span class="nf">set_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb_func</span><span class="p">):</span>
+<div class="viewcode-block" id="Controller.set_callback"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_callback">[docs]</a>    <span class="k">def</span> <span class="nf">set_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">dict</span><span class="p">],</span> <span class="kc">None</span><span class="p">]):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set callback function for when data from motors arrives.</span>
 <span class="sd">        The data in the form of a dictionary will be pass to this function.</span>
@@ -498,7 +499,7 @@
 <div class="viewcode-block" id="Controller.get_pos"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.get_pos">[docs]</a>    <span class="nd">@if_no_cb_assigned</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="nd">@wait_for_data</span>
-    <span class="k">def</span> <span class="nf">get_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get current pos.</span>
 
@@ -511,7 +512,7 @@
 <div class="viewcode-block" id="Controller.get_speed"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.get_speed">[docs]</a>    <span class="nd">@if_no_cb_assigned</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="nd">@wait_for_data</span>
-    <span class="k">def</span> <span class="nf">get_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get current speed.</span>
 
@@ -524,7 +525,7 @@
 <div class="viewcode-block" id="Controller.get_torque"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.get_torque">[docs]</a>    <span class="nd">@if_no_cb_assigned</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="nd">@wait_for_data</span>
-    <span class="k">def</span> <span class="nf">get_torque</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_torque</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get current torque.</span>
 
