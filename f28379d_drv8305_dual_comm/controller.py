@@ -2,8 +2,10 @@ import re
 import struct
 import threading
 from collections import deque
-from queue import Queue
 from functools import wraps
+from queue import Queue
+from time import sleep
+
 import serial
 
 from f28379d_drv8305_dual_comm.defs import (
@@ -35,7 +37,7 @@ class Controller:
 
         self.baud = baud
 
-        self._read_queue = deque(maxlen=sampling_rate)
+        self._read_deque = deque(maxlen=sampling_rate)
 
         self._thread = None
         self._write_to_queue = True
@@ -68,7 +70,16 @@ class Controller:
         def wrapper(self, *args, **kwargs):
             if not self._write_to_queue:
                 raise RuntimeError("Callback has been assigned.")
+            return func(self, *args, **kwargs)
 
+        return wrapper
+
+    @staticmethod
+    def wait_for_data(func):
+        @wraps(func)
+        def wrapper(self, *args, **kwargs):
+            while not self._read_deque:
+                sleep(0.01)
             return func(self, *args, **kwargs)
 
         return wrapper
@@ -375,7 +386,7 @@ class Controller:
             if unpacked_data[-1] != b"\n":
                 _ = ser.readline()
             elif self._write_to_queue:
-                self._read_queue.append(dict(zip(self._header, unpacked_data[1:-1])))
+                self._read_deque.append(dict(zip(self._header, unpacked_data[1:-1])))
             elif callable(self._on_motor_measurement_cb):
                 self._on_motor_measurement_cb(
                     dict(zip(self._header, unpacked_data[1:-1]))
@@ -404,18 +415,21 @@ class Controller:
         Remove callback function.
         """
         self._on_motor_measurement_cb = None
+        self._read_deque.clear()
         self._write_to_queue = True
 
     @if_no_cb_assigned
+    @wait_for_data
     def get_from_queue(self):
         """
         Data from motors are put into a read queue by default.
         To get data from motors, either read from this queue or set a callback function.
         """
-        return self._read_queue.popleft()
+        return self._read_deque.popleft()
 
     @if_no_cb_assigned
     @if_motor_no_is_valid
+    @wait_for_data
     def get_pos(self, motor_no) -> float:
         """
         Get current pos.
@@ -424,10 +438,11 @@ class Controller:
         :return: Current position in radians
         """
         key = f"motor{motor_no}_pos"
-        return self._read_queue[-1][key]
+        return self._read_deque[-1][key]
 
     @if_no_cb_assigned
     @if_motor_no_is_valid
+    @wait_for_data
     def get_speed(self, motor_no) -> float:
         """
         Get current speed.
@@ -436,10 +451,11 @@ class Controller:
         :return: Current speed in rad/s
         """
         key = f"motor{motor_no}_speed"
-        return self._read_queue[-1][key]
+        return self._read_deque[-1][key]
 
     @if_no_cb_assigned
     @if_motor_no_is_valid
+    @wait_for_data
     def get_torque(self, motor_no) -> float:
         """
         Get current torque.
@@ -448,7 +464,7 @@ class Controller:
         :return: Current torque in N m
         """
         key = f"motor{motor_no}_torque"
-        return self._read_queue[-1][key]
+        return self._read_deque[-1][key]
 
     def disconnect(self):
         """
