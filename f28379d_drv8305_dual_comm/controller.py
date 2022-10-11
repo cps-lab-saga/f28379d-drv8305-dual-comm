@@ -5,6 +5,7 @@ from collections import deque
 from functools import wraps
 from queue import Queue
 from time import sleep
+from typing import Callable
 
 import serial
 
@@ -400,7 +401,7 @@ class Controller:
                 ser.write(identifier + msg_packed + checksum_packed)
         ser.close()
 
-    def set_callback(self, cb_func):
+    def set_callback(self, cb_func: Callable[[dict], None]):
         """
         Set callback function for when data from motors arrives.
         The data in the form of a dictionary will be pass to this function.
@@ -430,7 +431,7 @@ class Controller:
     @if_no_cb_assigned
     @if_motor_no_is_valid
     @wait_for_data
-    def get_pos(self, motor_no) -> float:
+    def get_pos(self, motor_no: int) -> float:
         """
         Get current pos.
 
@@ -443,7 +444,7 @@ class Controller:
     @if_no_cb_assigned
     @if_motor_no_is_valid
     @wait_for_data
-    def get_speed(self, motor_no) -> float:
+    def get_speed(self, motor_no: int) -> float:
         """
         Get current speed.
 
@@ -456,7 +457,7 @@ class Controller:
     @if_no_cb_assigned
     @if_motor_no_is_valid
     @wait_for_data
-    def get_torque(self, motor_no) -> float:
+    def get_torque(self, motor_no: int) -> float:
         """
         Get current torque.
 
