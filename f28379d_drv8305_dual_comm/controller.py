@@ -473,9 +473,6 @@ class Controller:
         self._stop_serial = True
         self._thread.join()
 
-    def __del__(self):
-        self.disconnect()
-
 
 if __name__ == "__main__":
     c = Controller()
