@@ -1,3 +1,4 @@
+import logging
 import re
 import struct
 import threading
@@ -32,6 +33,7 @@ class Controller:
             if port_found is not None:
                 self.port = port_found
             else:
+                logging.error("No valid port found.")
                 raise ValueError("No valid port found.")
         else:
             self.port = port
@@ -60,6 +62,7 @@ class Controller:
         @wraps(func)
         def wrapper(self, motor_no, *args, **kwargs):
             if motor_no not in [1, 2]:
+                logging.error("Invalid motor no.")
                 raise ValueError("Invalid motor no.")
             return func(self, motor_no, *args, **kwargs)
 
@@ -70,6 +73,7 @@ class Controller:
         @wraps(func)
         def wrapper(self, *args, **kwargs):
             if not self._write_to_queue:
+                logging.error("Callback has been assigned.")
                 raise RuntimeError("Callback has been assigned.")
             return func(self, *args, **kwargs)
 
@@ -85,13 +89,28 @@ class Controller:
 
         return wrapper
 
+    @staticmethod
+    def log_command(func):
+        @wraps(func)
+        def wrapper(self, motor_no, *args, **kwargs):
+            val = "".join(str(x) for x in (*args, *kwargs.values()))
+            command = func.__doc__.lstrip().split("\n", 1)[0][:-1]
+            if not val:
+                logging.info(f"{command} for motor {motor_no}.")
+            else:
+                logging.info(f"{command} for motor {motor_no} to {val}.")
+            return func(self, motor_no, *args, **kwargs)
+
+        return wrapper
+
+    @log_command
     @if_motor_no_is_valid
     def set_control_mode(self, motor_no: int, mode: str):
         """
         Set motor control mode.
 
         :param motor_no: 1 or 2
-        :param mode: Choose between speed control, position control (speed), position control (direct), bang bang, and impedance control modes
+        :param mode: Choose between speed control, position control (speed), position control (direct), bang ban control, and impedance control modes
         """
 
         if isinstance(mode, str):
@@ -117,7 +136,8 @@ class Controller:
                 case "impedance control" | "impedance":
                     self._selected_control_mode = ControlMode.Impedance_Control
                 case _:
-                    raise ValueError("invalid control mode")
+                    logging.error("Invalid control mode.")
+                    raise ValueError("Invalid control mode.")
 
         elif isinstance(mode, (ControlMode, int)):
             self._selected_control_mode = mode
@@ -127,6 +147,7 @@ class Controller:
 
         self._write_queue.put((b"\x01", motor_no, float(self._selected_control_mode)))
 
+    @log_command
     @if_motor_no_is_valid
     def set_max_torque(self, motor_no: int, torque: float):
         """
@@ -138,6 +159,7 @@ class Controller:
         """
         self._write_queue.put((b"\x02", motor_no, torque))
 
+    @log_command
     @if_motor_no_is_valid
     def set_speed(self, motor_no: int, speed: float):
         """
@@ -149,6 +171,7 @@ class Controller:
         """
         self._write_queue.put((b"\x03", motor_no, speed))
 
+    @log_command
     @if_motor_no_is_valid
     def set_pos(self, motor_no: int, pos: float):
         """
@@ -160,6 +183,7 @@ class Controller:
         """
         self._write_queue.put((b"\x04", motor_no, pos))
 
+    @log_command
     @if_motor_no_is_valid
     def set_speed_p(self, motor_no: int, gain: float):
         """
@@ -171,6 +195,7 @@ class Controller:
         """
         self._write_queue.put((b"\x11", motor_no, gain))
 
+    @log_command
     @if_motor_no_is_valid
     def set_speed_i(self, motor_no: int, gain: float):
         """
@@ -182,6 +207,7 @@ class Controller:
         """
         self._write_queue.put((b"\x12", motor_no, gain))
 
+    @log_command
     @if_motor_no_is_valid
     def set_speed_d(self, motor_no: int, gain: float):
         """
@@ -193,6 +219,7 @@ class Controller:
         """
         self._write_queue.put((b"\x13", motor_no, gain))
 
+    @log_command
     @if_motor_no_is_valid
     def set_hold_torque(self, motor_no: int, torque: float):
         """
@@ -204,6 +231,7 @@ class Controller:
         """
         self._write_queue.put((b"\x21", motor_no, torque))
 
+    @log_command
     @if_motor_no_is_valid
     def set_pos_p(self, motor_no: int, gain: float):
         """
@@ -215,6 +243,7 @@ class Controller:
         """
         self._write_queue.put((b"\x31", motor_no, gain))
 
+    @log_command
     @if_motor_no_is_valid
     def set_pos_i(self, motor_no: int, gain: float):
         """
@@ -226,6 +255,7 @@ class Controller:
         """
         self._write_queue.put((b"\x32", motor_no, gain))
 
+    @log_command
     @if_motor_no_is_valid
     def set_pos_d(self, motor_no: int, gain: float):
         """
@@ -237,6 +267,7 @@ class Controller:
         """
         self._write_queue.put((b"\x33", motor_no, gain))
 
+    @log_command
     @if_motor_no_is_valid
     def set_max_speed(self, motor_no: int, speed: float):
         """
@@ -248,6 +279,7 @@ class Controller:
         """
         self._write_queue.put((b"\x34", motor_no, speed))
 
+    @log_command
     @if_motor_no_is_valid
     def set_pos_p_direct(self, motor_no: int, gain: float):
         """
@@ -259,6 +291,7 @@ class Controller:
         """
         self._write_queue.put((b"\x41", motor_no, gain))
 
+    @log_command
     @if_motor_no_is_valid
     def set_pos_i_direct(self, motor_no: int, gain: float):
         """
@@ -270,6 +303,7 @@ class Controller:
         """
         self._write_queue.put((b"\x42", motor_no, gain))
 
+    @log_command
     @if_motor_no_is_valid
     def set_pos_d_direct(self, motor_no: int, gain: float):
         """
@@ -281,6 +315,7 @@ class Controller:
         """
         self._write_queue.put((b"\x43", motor_no, gain))
 
+    @log_command
     @if_motor_no_is_valid
     def set_bang_bang_torque(self, motor_no: int, torque: float):
         """
@@ -292,6 +327,7 @@ class Controller:
         """
         self._write_queue.put((b"\x51", motor_no, torque))
 
+    @log_command
     @if_motor_no_is_valid
     def set_bang_bang_deadband(self, motor_no: int, deadband: float):
         """
@@ -303,6 +339,7 @@ class Controller:
         """
         self._write_queue.put((b"\x52", motor_no, deadband))
 
+    @log_command
     @if_motor_no_is_valid
     def set_inertia(self, motor_no: int, inertia: float):
         """
@@ -314,6 +351,7 @@ class Controller:
         """
         self._write_queue.put((b"\x61", motor_no, inertia))
 
+    @log_command
     @if_motor_no_is_valid
     def set_damping(self, motor_no: int, damping: float):
         """
@@ -325,6 +363,7 @@ class Controller:
         """
         self._write_queue.put((b"\x62", motor_no, damping))
 
+    @log_command
     @if_motor_no_is_valid
     def set_stiffness(self, motor_no: int, stiffness: float):
         """
@@ -336,6 +375,7 @@ class Controller:
         """
         self._write_queue.put((b"\x63", motor_no, stiffness))
 
+    @log_command
     @if_motor_no_is_valid
     def set_zero_angle(self, motor_no: int):
         """
@@ -346,6 +386,7 @@ class Controller:
         """
         self._write_queue.put((b"\xF0", motor_no, 1))
 
+    @log_command
     @if_motor_no_is_valid
     def realign_motor(self, motor_no: int):
         """
@@ -355,6 +396,7 @@ class Controller:
         """
         self._write_queue.put((b"\xF2", motor_no, 1))
 
+    @log_command
     @if_motor_no_is_valid
     def enable_motor(self, motor_no: int):
         """
@@ -364,6 +406,7 @@ class Controller:
         """
         self._write_queue.put((b"\xF3", motor_no, 1))
 
+    @log_command
     @if_motor_no_is_valid
     def disable_motor(self, motor_no: int):
         """
@@ -379,6 +422,8 @@ class Controller:
 
     def _read_serial_data(self):
         ser = serial.Serial(port=self.port, baudrate=self.baud, timeout=1)
+        logging.info(f"Connected to {self.port} at baudrate {self.baud}.")
+
         while not self._stop_serial:
             raw_data = ser.read(self._read_struct.size)
             if not raw_data:
@@ -410,6 +455,7 @@ class Controller:
         """
         self._on_motor_measurement_cb = cb_func
         self._write_to_queue = False
+        logging.info(f"Callback set to {cb_func.__name__}.")
 
     def remove_callback(self):
         """
@@ -418,6 +464,7 @@ class Controller:
         self._on_motor_measurement_cb = None
         self._read_deque.clear()
         self._write_to_queue = True
+        logging.info("Callback removed.")
 
     @if_no_cb_assigned
     @wait_for_data
@@ -441,6 +488,7 @@ class Controller:
         key = f"motor{motor_no}_pos"
         return self._read_deque[-1][key]
 
+    @log_command
     @if_no_cb_assigned
     @if_motor_no_is_valid
     @wait_for_data
@@ -454,6 +502,7 @@ class Controller:
         key = f"motor{motor_no}_speed"
         return self._read_deque[-1][key]
 
+    @log_command
     @if_no_cb_assigned
     @if_motor_no_is_valid
     @wait_for_data
@@ -473,6 +522,7 @@ class Controller:
         """
         self._stop_serial = True
         self._thread.join()
+        logging.info("Disconnected.")
 
 
 if __name__ == "__main__":
