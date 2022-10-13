@@ -479,6 +479,7 @@ class Controller:
         """
         return self._read_deque.popleft()
 
+    @log_command
     @if_no_cb_assigned
     @if_motor_no_is_valid
     @wait_for_data
