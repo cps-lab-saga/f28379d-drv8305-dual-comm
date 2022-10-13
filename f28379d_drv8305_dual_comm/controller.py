@@ -45,7 +45,8 @@ class Controller:
         self._thread = None
         self._write_to_queue = True
         self._on_motor_measurement_cb = None
-        self._stop_serial = False
+        self._stop_serial = threading.Event()
+        self._serial_connected = threading.Event()
 
         self._header = data_variables
         self._read_struct = struct.Struct(_read_format)
@@ -419,12 +420,15 @@ class Controller:
     def _start_serial(self):
         self._thread = threading.Thread(target=self._read_serial_data, daemon=True)
         self._thread.start()
+        while not self._serial_connected.is_set():
+            sleep(0.01)
 
     def _read_serial_data(self):
         ser = serial.Serial(port=self.port, baudrate=self.baud, timeout=1)
         logging.info(f"Connected to {self.port} at baudrate {self.baud}.")
+        self._serial_connected.set()
 
-        while not self._stop_serial:
+        while not self._stop_serial.is_set():
             raw_data = ser.read(self._read_struct.size)
             if not raw_data:
                 continue
@@ -520,8 +524,11 @@ class Controller:
         """
         Disconnect serial.
         """
-        self._stop_serial = True
+        self._stop_serial.set()
         self._thread.join()
+        self._serial_connected.clear()
+        self._stop_serial.clear()
+
         logging.info("Disconnected.")
 
 
