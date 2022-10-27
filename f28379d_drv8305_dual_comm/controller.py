@@ -168,7 +168,7 @@ class Controller:
         Used in speed control mode.
 
         :param motor_no: 1 or 2
-        :param speed: Rotational speed in rad/s (max speed = 600 rad/s)
+        :param speed: Rotational speed in rad/s (max speed = 30 rad/s)
         """
         self._write_queue.put((b"\x03", motor_no, speed))
 
@@ -276,7 +276,7 @@ class Controller:
         Used in position control (speed) mode.
 
         :param motor_no: 1 or 2
-        :param speed: Rotational speed in rad/s (max speed = 600 rad/s)
+        :param speed: Rotational speed in rad/s (max speed = 30 rad/s)
         """
         self._write_queue.put((b"\x34", motor_no, speed))
 
