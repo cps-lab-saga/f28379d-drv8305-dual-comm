@@ -236,7 +236,7 @@
 <span class="sd">        Used in speed control mode.</span>
 
 <span class="sd">        :param motor_no: 1 or 2</span>
-<span class="sd">        :param speed: Rotational speed in rad/s (max speed = 600 rad/s)</span>
+<span class="sd">        :param speed: Rotational speed in rad/s (max speed = 30 rad/s)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x03</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">speed</span><span class="p">))</span></div>
 
@@ -344,7 +344,7 @@
 <span class="sd">        Used in position control (speed) mode.</span>
 
 <span class="sd">        :param motor_no: 1 or 2</span>
-<span class="sd">        :param speed: Rotational speed in rad/s (max speed = 600 rad/s)</span>
+<span class="sd">        :param speed: Rotational speed in rad/s (max speed = 30 rad/s)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x34</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">speed</span><span class="p">))</span></div>
 
