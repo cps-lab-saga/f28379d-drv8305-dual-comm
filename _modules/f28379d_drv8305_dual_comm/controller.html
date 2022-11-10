@@ -214,7 +214,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid control mode&quot;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x01</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span><span class="p">)))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x01</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_max_torque"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_max_torque">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -226,7 +227,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param torque: Torque in N m (max torque = 4.3 N m)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x02</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">torque</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x02</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">torque</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_speed"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_speed">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -238,7 +240,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param speed: Rotational speed in rad/s (max speed = 30 rad/s)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x03</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">speed</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x03</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">speed</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_pos"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -250,7 +253,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param pos: Target angle in radians</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x04</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">pos</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x04</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">pos</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_speed_p"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_speed_p">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -262,7 +266,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param gain: Proportional gain</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x11</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x11</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_speed_i"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_speed_i">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -274,7 +279,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param gain: Integral gain</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x12</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x12</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_speed_d"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_speed_d">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -286,7 +292,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param gain: Derivative gain</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x13</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x13</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_hold_torque"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_hold_torque">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -298,7 +305,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param torque: Torque in N m (max torque = 4.3 N m)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x21</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">torque</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x21</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">torque</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_pos_p"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_p">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -310,7 +318,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param gain: Proportional gain</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x31</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x31</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_pos_i"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_i">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -322,7 +331,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param gain: Integral gain</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x32</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x32</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_pos_d"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_d">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -334,7 +344,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param gain: Derivative gain</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x33</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x33</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_max_speed"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_max_speed">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -346,7 +357,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param speed: Rotational speed in rad/s (max speed = 30 rad/s)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x34</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">speed</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x34</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">speed</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_pos_p_direct"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_p_direct">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -358,7 +370,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param gain: Proportional gain</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x41</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x41</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_pos_i_direct"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_i_direct">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -370,7 +383,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param gain: Integral gain</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x42</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x42</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_pos_d_direct"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_d_direct">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -382,7 +396,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param gain: Derivative gain</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x43</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x43</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_bang_bang_torque"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_bang_bang_torque">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -394,7 +409,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param torque: Torque in N m (max torque = 4.3 N m)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x51</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">torque</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x51</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">torque</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_bang_bang_deadband"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_bang_bang_deadband">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -406,7 +422,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param deadband: Deadband in radians</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x52</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">deadband</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x52</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">deadband</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_inertia"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_inertia">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -418,7 +435,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param inertia: Inertia</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x61</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">inertia</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x61</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">inertia</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_damping"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_damping">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -430,7 +448,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param damping: Damping</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x62</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">damping</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x62</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">damping</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_stiffness"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_stiffness">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -442,7 +461,8 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param stiffness: Stiffness</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x63</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">stiffness</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x63</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">stiffness</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_zero_angle"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_zero_angle">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -453,7 +473,8 @@
 
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF0</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF0</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.realign_motor"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.realign_motor">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -463,7 +484,8 @@
 
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF2</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF2</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.enable_motor"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.enable_motor">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -473,7 +495,8 @@
 
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF3</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF3</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.disable_motor"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.disable_motor">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
@@ -483,7 +506,8 @@
 
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF3</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF3</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
     <span class="k">def</span> <span class="nf">_start_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_read_serial_data</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -527,7 +551,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_on_motor_measurement_cb</span> <span class="o">=</span> <span class="n">cb_func</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_to_queue</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Callback set to </span><span class="si">{</span><span class="n">cb_func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span></div>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Callback set to </span><span class="si">{</span><span class="n">cb_func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.remove_callback"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.remove_callback">[docs]</a>    <span class="k">def</span> <span class="nf">remove_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -536,7 +561,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_on_motor_measurement_cb</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_read_deque</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_to_queue</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Callback removed.&quot;</span><span class="p">)</span></div>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Callback removed.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.get_from_queue"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.get_from_queue">[docs]</a>    <span class="nd">@if_no_cb_assigned</span>
     <span class="nd">@wait_for_data</span>
@@ -598,7 +624,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_serial_connected</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stop_serial</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 
-        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Disconnected.&quot;</span><span class="p">)</span></div></div>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Disconnected.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div></div>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
