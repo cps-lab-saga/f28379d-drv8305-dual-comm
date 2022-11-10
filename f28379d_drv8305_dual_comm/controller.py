@@ -147,6 +147,7 @@ class Controller:
             raise ValueError("invalid control mode")
 
         self._write_queue.put((b"\x01", motor_no, float(self._selected_control_mode)))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -159,6 +160,7 @@ class Controller:
         :param torque: Torque in N m (max torque = 4.3 N m)
         """
         self._write_queue.put((b"\x02", motor_no, torque))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -171,6 +173,7 @@ class Controller:
         :param speed: Rotational speed in rad/s (max speed = 30 rad/s)
         """
         self._write_queue.put((b"\x03", motor_no, speed))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -183,6 +186,7 @@ class Controller:
         :param pos: Target angle in radians
         """
         self._write_queue.put((b"\x04", motor_no, pos))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -195,6 +199,7 @@ class Controller:
         :param gain: Proportional gain
         """
         self._write_queue.put((b"\x11", motor_no, gain))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -207,6 +212,7 @@ class Controller:
         :param gain: Integral gain
         """
         self._write_queue.put((b"\x12", motor_no, gain))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -219,6 +225,7 @@ class Controller:
         :param gain: Derivative gain
         """
         self._write_queue.put((b"\x13", motor_no, gain))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -231,6 +238,7 @@ class Controller:
         :param torque: Torque in N m (max torque = 4.3 N m)
         """
         self._write_queue.put((b"\x21", motor_no, torque))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -243,6 +251,7 @@ class Controller:
         :param gain: Proportional gain
         """
         self._write_queue.put((b"\x31", motor_no, gain))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -255,6 +264,7 @@ class Controller:
         :param gain: Integral gain
         """
         self._write_queue.put((b"\x32", motor_no, gain))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -267,6 +277,7 @@ class Controller:
         :param gain: Derivative gain
         """
         self._write_queue.put((b"\x33", motor_no, gain))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -279,6 +290,7 @@ class Controller:
         :param speed: Rotational speed in rad/s (max speed = 30 rad/s)
         """
         self._write_queue.put((b"\x34", motor_no, speed))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -291,6 +303,7 @@ class Controller:
         :param gain: Proportional gain
         """
         self._write_queue.put((b"\x41", motor_no, gain))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -303,6 +316,7 @@ class Controller:
         :param gain: Integral gain
         """
         self._write_queue.put((b"\x42", motor_no, gain))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -315,6 +329,7 @@ class Controller:
         :param gain: Derivative gain
         """
         self._write_queue.put((b"\x43", motor_no, gain))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -327,6 +342,7 @@ class Controller:
         :param torque: Torque in N m (max torque = 4.3 N m)
         """
         self._write_queue.put((b"\x51", motor_no, torque))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -339,6 +355,7 @@ class Controller:
         :param deadband: Deadband in radians
         """
         self._write_queue.put((b"\x52", motor_no, deadband))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -351,6 +368,7 @@ class Controller:
         :param inertia: Inertia
         """
         self._write_queue.put((b"\x61", motor_no, inertia))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -363,6 +381,7 @@ class Controller:
         :param damping: Damping
         """
         self._write_queue.put((b"\x62", motor_no, damping))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -375,6 +394,7 @@ class Controller:
         :param stiffness: Stiffness
         """
         self._write_queue.put((b"\x63", motor_no, stiffness))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -386,6 +406,7 @@ class Controller:
         :param motor_no: 1 or 2
         """
         self._write_queue.put((b"\xF0", motor_no, 1))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -396,6 +417,7 @@ class Controller:
         :param motor_no: 1 or 2
         """
         self._write_queue.put((b"\xF2", motor_no, 1))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -406,6 +428,7 @@ class Controller:
         :param motor_no: 1 or 2
         """
         self._write_queue.put((b"\xF3", motor_no, 1))
+        return self
 
     @log_command
     @if_motor_no_is_valid
@@ -416,6 +439,7 @@ class Controller:
         :param motor_no: 1 or 2
         """
         self._write_queue.put((b"\xF3", motor_no, 0))
+        return self
 
     def _start_serial(self):
         self._thread = threading.Thread(target=self._read_serial_data, daemon=True)
@@ -460,6 +484,7 @@ class Controller:
         self._on_motor_measurement_cb = cb_func
         self._write_to_queue = False
         logging.info(f"Callback set to {cb_func.__name__}.")
+        return self
 
     def remove_callback(self):
         """
@@ -469,6 +494,7 @@ class Controller:
         self._read_deque.clear()
         self._write_to_queue = True
         logging.info("Callback removed.")
+        return self
 
     @if_no_cb_assigned
     @wait_for_data
@@ -531,6 +557,7 @@ class Controller:
         self._stop_serial.clear()
 
         logging.info("Disconnected.")
+        return self
 
 
 if __name__ == "__main__":
