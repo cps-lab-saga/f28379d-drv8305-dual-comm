@@ -26,7 +26,6 @@ class Controller:
     """
 
     def __init__(self, port=None, device_name=None, baud=115200):
-
         if port is None:
             self.device_name = "XDS100" if device_name is None else device_name
             port_found = find_port(self.device_name)
@@ -439,6 +438,28 @@ class Controller:
         :param motor_no: 1 or 2
         """
         self._write_queue.put((b"\xF3", motor_no, 0))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def set_match_other_position(self, motor_no: int):
+        """
+        Set motor target position to current position of the other motor.
+
+        :param motor_no: 1 or 2
+        """
+        self._write_queue.put((b"\xF4", motor_no, 1))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def unset_match_other_position(self, motor_no: int):
+        """
+        Unset motor target position to current position of the other motor.
+
+        :param motor_no: 1 or 2
+        """
+        self._write_queue.put((b"\xF4", motor_no, 0))
         return self
 
     def _start_serial(self):
