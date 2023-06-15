@@ -58,6 +58,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_damping"><code class="docutils literal notranslate"><span class="pre">Controller.set_damping()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_hold_torque"><code class="docutils literal notranslate"><span class="pre">Controller.set_hold_torque()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_inertia"><code class="docutils literal notranslate"><span class="pre">Controller.set_inertia()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_match_other_position"><code class="docutils literal notranslate"><span class="pre">Controller.set_match_other_position()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_max_speed"><code class="docutils literal notranslate"><span class="pre">Controller.set_max_speed()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_max_torque"><code class="docutils literal notranslate"><span class="pre">Controller.set_max_torque()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos()</span></code></a></li>
@@ -73,6 +74,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_speed_p"><code class="docutils literal notranslate"><span class="pre">Controller.set_speed_p()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_stiffness"><code class="docutils literal notranslate"><span class="pre">Controller.set_stiffness()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_zero_angle"><code class="docutils literal notranslate"><span class="pre">Controller.set_zero_angle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.unset_match_other_position"><code class="docutils literal notranslate"><span class="pre">Controller.unset_match_other_position()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -314,6 +316,17 @@ Used in impedance control mode.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_match_other_position">
+<span class="sig-name descname"><span class="pre">set_match_other_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_match_other_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_match_other_position" title="Permalink to this definition"></a></dt>
+<dd><p>Set motor target position to current position of the other motor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_max_speed">
 <span class="sig-name descname"><span class="pre">set_max_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_max_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_max_speed" title="Permalink to this definition"></a></dt>
 <dd><p>Set maximum target speed for position control.
@@ -528,6 +541,17 @@ Used in impedance control mode.</p>
 <span class="sig-name descname"><span class="pre">set_zero_angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_zero_angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_zero_angle" title="Permalink to this definition"></a></dt>
 <dd><p>Set zero angle.
 Used in position control (speed), position control (direct), bang bang, and impedance control modes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.unset_match_other_position">
+<span class="sig-name descname"><span class="pre">unset_match_other_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.unset_match_other_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.unset_match_other_position" title="Permalink to this definition"></a></dt>
+<dd><p>Unset motor target position to current position of the other motor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>

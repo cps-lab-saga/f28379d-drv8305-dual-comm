@@ -94,7 +94,6 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">baud</span><span class="o">=</span><span class="mi">115200</span><span class="p">):</span>
-
         <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">device_name</span> <span class="o">=</span> <span class="s2">&quot;XDS100&quot;</span> <span class="k">if</span> <span class="n">device_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">device_name</span>
             <span class="n">port_found</span> <span class="o">=</span> <span class="n">find_port</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device_name</span><span class="p">)</span>
@@ -507,6 +506,28 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF3</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Controller.set_match_other_position"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_match_other_position">[docs]</a>    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">set_match_other_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set motor target position to current position of the other motor.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF4</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Controller.unset_match_other_position"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.unset_match_other_position">[docs]</a>    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">unset_match_other_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unset motor target position to current position of the other motor.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\xF4</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
     <span class="k">def</span> <span class="nf">_start_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
