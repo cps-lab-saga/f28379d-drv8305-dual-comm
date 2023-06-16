@@ -39,3 +39,4 @@ html_static_path = ["_static"]
 
 autodoc_member_order = "groupwise"
 autodoc_typehints = "description"
+autodoc_member_order = "bysource"
