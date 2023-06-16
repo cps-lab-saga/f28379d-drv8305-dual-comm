@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Controller &mdash; f28379d-drv8305-dual-comm  documentation</title>
@@ -28,11 +28,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> f28379d-drv8305-dual-comm
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            f28379d-drv8305-dual-comm
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -42,39 +46,39 @@
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Controller</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller"><code class="docutils literal notranslate"><span class="pre">Controller</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.disable_motor"><code class="docutils literal notranslate"><span class="pre">Controller.disable_motor()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.disconnect"><code class="docutils literal notranslate"><span class="pre">Controller.disconnect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_control_mode"><code class="docutils literal notranslate"><span class="pre">Controller.set_control_mode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_max_torque"><code class="docutils literal notranslate"><span class="pre">Controller.set_max_torque()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_speed"><code class="docutils literal notranslate"><span class="pre">Controller.set_speed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_speed_p"><code class="docutils literal notranslate"><span class="pre">Controller.set_speed_p()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_speed_i"><code class="docutils literal notranslate"><span class="pre">Controller.set_speed_i()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_speed_d"><code class="docutils literal notranslate"><span class="pre">Controller.set_speed_d()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_hold_torque"><code class="docutils literal notranslate"><span class="pre">Controller.set_hold_torque()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos_p"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos_p()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos_i"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos_i()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos_d"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos_d()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_max_speed"><code class="docutils literal notranslate"><span class="pre">Controller.set_max_speed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos_p_direct"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos_p_direct()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos_i_direct"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos_i_direct()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos_d_direct"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos_d_direct()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_bang_bang_torque"><code class="docutils literal notranslate"><span class="pre">Controller.set_bang_bang_torque()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_bang_bang_deadband"><code class="docutils literal notranslate"><span class="pre">Controller.set_bang_bang_deadband()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_inertia"><code class="docutils literal notranslate"><span class="pre">Controller.set_inertia()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_damping"><code class="docutils literal notranslate"><span class="pre">Controller.set_damping()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_stiffness"><code class="docutils literal notranslate"><span class="pre">Controller.set_stiffness()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_zero_angle"><code class="docutils literal notranslate"><span class="pre">Controller.set_zero_angle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.realign_motor"><code class="docutils literal notranslate"><span class="pre">Controller.realign_motor()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.enable_motor"><code class="docutils literal notranslate"><span class="pre">Controller.enable_motor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.disable_motor"><code class="docutils literal notranslate"><span class="pre">Controller.disable_motor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_match_other_position"><code class="docutils literal notranslate"><span class="pre">Controller.set_match_other_position()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.unset_match_other_position"><code class="docutils literal notranslate"><span class="pre">Controller.unset_match_other_position()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_callback"><code class="docutils literal notranslate"><span class="pre">Controller.set_callback()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.remove_callback"><code class="docutils literal notranslate"><span class="pre">Controller.remove_callback()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.get_from_queue"><code class="docutils literal notranslate"><span class="pre">Controller.get_from_queue()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.get_pos"><code class="docutils literal notranslate"><span class="pre">Controller.get_pos()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.get_speed"><code class="docutils literal notranslate"><span class="pre">Controller.get_speed()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.get_torque"><code class="docutils literal notranslate"><span class="pre">Controller.get_torque()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.realign_motor"><code class="docutils literal notranslate"><span class="pre">Controller.realign_motor()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.remove_callback"><code class="docutils literal notranslate"><span class="pre">Controller.remove_callback()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_bang_bang_deadband"><code class="docutils literal notranslate"><span class="pre">Controller.set_bang_bang_deadband()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_bang_bang_torque"><code class="docutils literal notranslate"><span class="pre">Controller.set_bang_bang_torque()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_callback"><code class="docutils literal notranslate"><span class="pre">Controller.set_callback()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_control_mode"><code class="docutils literal notranslate"><span class="pre">Controller.set_control_mode()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_damping"><code class="docutils literal notranslate"><span class="pre">Controller.set_damping()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_hold_torque"><code class="docutils literal notranslate"><span class="pre">Controller.set_hold_torque()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_inertia"><code class="docutils literal notranslate"><span class="pre">Controller.set_inertia()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_match_other_position"><code class="docutils literal notranslate"><span class="pre">Controller.set_match_other_position()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_max_speed"><code class="docutils literal notranslate"><span class="pre">Controller.set_max_speed()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_max_torque"><code class="docutils literal notranslate"><span class="pre">Controller.set_max_torque()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos_d"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos_d()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos_d_direct"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos_d_direct()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos_i"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos_i()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos_i_direct"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos_i_direct()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos_p"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos_p()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_pos_p_direct"><code class="docutils literal notranslate"><span class="pre">Controller.set_pos_p_direct()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_speed"><code class="docutils literal notranslate"><span class="pre">Controller.set_speed()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_speed_d"><code class="docutils literal notranslate"><span class="pre">Controller.set_speed_d()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_speed_i"><code class="docutils literal notranslate"><span class="pre">Controller.set_speed_i()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_speed_p"><code class="docutils literal notranslate"><span class="pre">Controller.set_speed_p()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_stiffness"><code class="docutils literal notranslate"><span class="pre">Controller.set_stiffness()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_zero_angle"><code class="docutils literal notranslate"><span class="pre">Controller.set_zero_angle()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.unset_match_other_position"><code class="docutils literal notranslate"><span class="pre">Controller.unset_match_other_position()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.disconnect"><code class="docutils literal notranslate"><span class="pre">Controller.disconnect()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -94,8 +98,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Controller</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Controller</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/controller.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -112,230 +116,14 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">f28379d_drv8305_dual_comm.</span></span><span class="sig-name descname"><span class="pre">Controller</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baud</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">115200</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller" title="Permalink to this definition"></a></dt>
 <dd><p>Communicate using serial with a f28379d used to control two motors through drv8305.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.disable_motor">
-<span class="sig-name descname"><span class="pre">disable_motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.disable_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.disable_motor" title="Permalink to this definition"></a></dt>
-<dd><p>Disable motor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.disconnect">
-<span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.disconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.disconnect" title="Permalink to this definition"></a></dt>
-<dd><p>Disconnect serial.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.enable_motor">
-<span class="sig-name descname"><span class="pre">enable_motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.enable_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.enable_motor" title="Permalink to this definition"></a></dt>
-<dd><p>Enable motor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.get_from_queue">
-<span class="sig-name descname"><span class="pre">get_from_queue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.get_from_queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.get_from_queue" title="Permalink to this definition"></a></dt>
-<dd><p>Data from motors are put into a read queue by default.
-To get data from motors, either read from this queue or set a callback function.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.get_pos">
-<span class="sig-name descname"><span class="pre">get_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.get_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.get_pos" title="Permalink to this definition"></a></dt>
-<dd><p>Get current pos.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Current position in radians</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.get_speed">
-<span class="sig-name descname"><span class="pre">get_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.get_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.get_speed" title="Permalink to this definition"></a></dt>
-<dd><p>Get current speed.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Current speed in rad/s</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.get_torque">
-<span class="sig-name descname"><span class="pre">get_torque</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.get_torque"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.get_torque" title="Permalink to this definition"></a></dt>
-<dd><p>Get current torque.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Current torque in N m</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.realign_motor">
-<span class="sig-name descname"><span class="pre">realign_motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.realign_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.realign_motor" title="Permalink to this definition"></a></dt>
-<dd><p>Realign motor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.remove_callback">
-<span class="sig-name descname"><span class="pre">remove_callback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.remove_callback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.remove_callback" title="Permalink to this definition"></a></dt>
-<dd><p>Remove callback function.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_bang_bang_deadband">
-<span class="sig-name descname"><span class="pre">set_bang_bang_deadband</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deadband</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_bang_bang_deadband"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_bang_bang_deadband" title="Permalink to this definition"></a></dt>
-<dd><p>Set deadband in radians in bang-bang control.
-Used in bang-bang control mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>deadband</strong> (<em>float</em>) – Deadband in radians</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_bang_bang_torque">
-<span class="sig-name descname"><span class="pre">set_bang_bang_torque</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torque</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_bang_bang_torque"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_bang_bang_torque" title="Permalink to this definition"></a></dt>
-<dd><p>Set constant torque in bang-bang control.
-Used in bang-bang control mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>torque</strong> (<em>float</em>) – Torque in N m (max torque = 4.3 N m)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_callback">
-<span class="sig-name descname"><span class="pre">set_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cb_func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_callback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_callback" title="Permalink to this definition"></a></dt>
-<dd><p>Set callback function for when data from motors arrives.
-The data in the form of a dictionary will be pass to this function.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>cb_func</strong> (<em>Callable</em><em>[</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>None</em><em>]</em>) – function with one argument</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_control_mode">
 <span class="sig-name descname"><span class="pre">set_control_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_control_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_control_mode" title="Permalink to this definition"></a></dt>
 <dd><p>Set motor control mode.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>mode</strong> (<em>str</em>) – Choose between speed control, position control (speed), position control (direct), bang ban control, and impedance control modes</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_damping">
-<span class="sig-name descname"><span class="pre">set_damping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">damping</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_damping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_damping" title="Permalink to this definition"></a></dt>
-<dd><p>Set rotational damping.
-Used in impedance control mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>damping</strong> (<em>float</em>) – Damping</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_hold_torque">
-<span class="sig-name descname"><span class="pre">set_hold_torque</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torque</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_hold_torque"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_hold_torque" title="Permalink to this definition"></a></dt>
-<dd><p>Set constant torque.
-Used in torque control mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>torque</strong> (<em>float</em>) – Torque in N m (max torque = 4.3 N m)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_inertia">
-<span class="sig-name descname"><span class="pre">set_inertia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inertia</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_inertia"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_inertia" title="Permalink to this definition"></a></dt>
-<dd><p>Set rotational inertia.
-Used in impedance control mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>inertia</strong> (<em>float</em>) – Inertia</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_match_other_position">
-<span class="sig-name descname"><span class="pre">set_match_other_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_match_other_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_match_other_position" title="Permalink to this definition"></a></dt>
-<dd><p>Set motor target position to current position of the other motor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_max_speed">
-<span class="sig-name descname"><span class="pre">set_max_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_max_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_max_speed" title="Permalink to this definition"></a></dt>
-<dd><p>Set maximum target speed for position control.
-Used in position control (speed) mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>speed</strong> (<em>float</em>) – Rotational speed in rad/s (max speed = 30 rad/s)</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – Choose between speed control, position control (speed), position control (direct), bang bang control, and impedance control modes</p></li>
 </ul>
 </dd>
 </dl>
@@ -347,115 +135,10 @@ Used in position control (speed) mode.</p>
 <dd><p>Set maximum torque in N m.
 Used in position control (speed), position control (direct), bang bang, and impedance control modes.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
 <li><p><strong>torque</strong> (<em>float</em>) – Torque in N m (max torque = 4.3 N m)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos">
-<span class="sig-name descname"><span class="pre">set_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos" title="Permalink to this definition"></a></dt>
-<dd><p>Set target pos.
-Used in position control (speed), position control (direct), bang bang, and impedance control modes.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>pos</strong> (<em>float</em>) – Target angle in radians</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos_d">
-<span class="sig-name descname"><span class="pre">set_pos_d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos_d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos_d" title="Permalink to this definition"></a></dt>
-<dd><p>Set D gain for position control (speed).
-Used in position control (speed) mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>gain</strong> (<em>float</em>) – Derivative gain</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos_d_direct">
-<span class="sig-name descname"><span class="pre">set_pos_d_direct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos_d_direct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos_d_direct" title="Permalink to this definition"></a></dt>
-<dd><p>Set D gain for position control (direct).
-Used in position control (direct) mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>gain</strong> (<em>float</em>) – Derivative gain</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos_i">
-<span class="sig-name descname"><span class="pre">set_pos_i</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos_i"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos_i" title="Permalink to this definition"></a></dt>
-<dd><p>Set I gain for position control (speed).
-Used in position control (speed) mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>gain</strong> (<em>float</em>) – Integral gain</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos_i_direct">
-<span class="sig-name descname"><span class="pre">set_pos_i_direct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos_i_direct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos_i_direct" title="Permalink to this definition"></a></dt>
-<dd><p>Set I gain for position control (direct).
-Used in position control (direct) mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>gain</strong> (<em>float</em>) – Integral gain</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos_p">
-<span class="sig-name descname"><span class="pre">set_pos_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos_p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos_p" title="Permalink to this definition"></a></dt>
-<dd><p>Set P gain for position control (speed).
-Used in position control (speed) mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>gain</strong> (<em>float</em>) – Proportional gain</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos_p_direct">
-<span class="sig-name descname"><span class="pre">set_pos_p_direct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos_p_direct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos_p_direct" title="Permalink to this definition"></a></dt>
-<dd><p>Set P gain for position control (direct).
-Used in position control (direct) mode.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>gain</strong> (<em>float</em>) – Proportional gain</p></li>
 </ul>
 </dd>
 </dl>
@@ -467,7 +150,7 @@ Used in position control (direct) mode.</p>
 <dd><p>Set target speed.
 Used in speed control mode.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
 <li><p><strong>speed</strong> (<em>float</em>) – Rotational speed in rad/s (max speed = 30 rad/s)</p></li>
@@ -477,30 +160,15 @@ Used in speed control mode.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_speed_d">
-<span class="sig-name descname"><span class="pre">set_speed_d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_speed_d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_speed_d" title="Permalink to this definition"></a></dt>
-<dd><p>Set D gain for speed control.
-Used in speed control and position control (speed) modes.</p>
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos">
+<span class="sig-name descname"><span class="pre">set_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos" title="Permalink to this definition"></a></dt>
+<dd><p>Set target pos.
+Used in position control (speed), position control (direct), bang bang, and impedance control modes.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>gain</strong> (<em>float</em>) – Derivative gain</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_speed_i">
-<span class="sig-name descname"><span class="pre">set_speed_i</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_speed_i"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_speed_i" title="Permalink to this definition"></a></dt>
-<dd><p>Set I gain for speed control.
-Used in speed control and position control (speed) modes.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
-<li><p><strong>gain</strong> (<em>float</em>) – Integral gain</p></li>
+<li><p><strong>pos</strong> (<em>float</em>) – Target angle in radians</p></li>
 </ul>
 </dd>
 </dl>
@@ -512,10 +180,220 @@ Used in speed control and position control (speed) modes.</p>
 <dd><p>Set P gain for speed control.
 Used in speed control and position control (speed) modes.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
 <li><p><strong>gain</strong> (<em>float</em>) – Proportional gain</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_speed_i">
+<span class="sig-name descname"><span class="pre">set_speed_i</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_speed_i"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_speed_i" title="Permalink to this definition"></a></dt>
+<dd><p>Set I gain for speed control.
+Used in speed control and position control (speed) modes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>gain</strong> (<em>float</em>) – Integral gain</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_speed_d">
+<span class="sig-name descname"><span class="pre">set_speed_d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_speed_d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_speed_d" title="Permalink to this definition"></a></dt>
+<dd><p>Set D gain for speed control.
+Used in speed control and position control (speed) modes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>gain</strong> (<em>float</em>) – Derivative gain</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_hold_torque">
+<span class="sig-name descname"><span class="pre">set_hold_torque</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torque</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_hold_torque"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_hold_torque" title="Permalink to this definition"></a></dt>
+<dd><p>Set constant torque.
+Used in torque control mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>torque</strong> (<em>float</em>) – Torque in N m (max torque = 4.3 N m)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos_p">
+<span class="sig-name descname"><span class="pre">set_pos_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos_p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos_p" title="Permalink to this definition"></a></dt>
+<dd><p>Set P gain for position control (speed).
+Used in position control (speed) mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>gain</strong> (<em>float</em>) – Proportional gain</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos_i">
+<span class="sig-name descname"><span class="pre">set_pos_i</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos_i"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos_i" title="Permalink to this definition"></a></dt>
+<dd><p>Set I gain for position control (speed).
+Used in position control (speed) mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>gain</strong> (<em>float</em>) – Integral gain</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos_d">
+<span class="sig-name descname"><span class="pre">set_pos_d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos_d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos_d" title="Permalink to this definition"></a></dt>
+<dd><p>Set D gain for position control (speed).
+Used in position control (speed) mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>gain</strong> (<em>float</em>) – Derivative gain</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_max_speed">
+<span class="sig-name descname"><span class="pre">set_max_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_max_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_max_speed" title="Permalink to this definition"></a></dt>
+<dd><p>Set maximum target speed for position control.
+Used in position control (speed) mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>speed</strong> (<em>float</em>) – Rotational speed in rad/s (max speed = 30 rad/s)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos_p_direct">
+<span class="sig-name descname"><span class="pre">set_pos_p_direct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos_p_direct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos_p_direct" title="Permalink to this definition"></a></dt>
+<dd><p>Set P gain for position control (direct).
+Used in position control (direct) mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>gain</strong> (<em>float</em>) – Proportional gain</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos_i_direct">
+<span class="sig-name descname"><span class="pre">set_pos_i_direct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos_i_direct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos_i_direct" title="Permalink to this definition"></a></dt>
+<dd><p>Set I gain for position control (direct).
+Used in position control (direct) mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>gain</strong> (<em>float</em>) – Integral gain</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_pos_d_direct">
+<span class="sig-name descname"><span class="pre">set_pos_d_direct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_pos_d_direct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_pos_d_direct" title="Permalink to this definition"></a></dt>
+<dd><p>Set D gain for position control (direct).
+Used in position control (direct) mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>gain</strong> (<em>float</em>) – Derivative gain</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_bang_bang_torque">
+<span class="sig-name descname"><span class="pre">set_bang_bang_torque</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torque</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_bang_bang_torque"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_bang_bang_torque" title="Permalink to this definition"></a></dt>
+<dd><p>Set constant torque in bang-bang control.
+Used in bang-bang control mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>torque</strong> (<em>float</em>) – Torque in N m (max torque = 4.3 N m)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_bang_bang_deadband">
+<span class="sig-name descname"><span class="pre">set_bang_bang_deadband</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deadband</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_bang_bang_deadband"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_bang_bang_deadband" title="Permalink to this definition"></a></dt>
+<dd><p>Set deadband in radians in bang-bang control.
+Used in bang-bang control mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>deadband</strong> (<em>float</em>) – Deadband in radians</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_inertia">
+<span class="sig-name descname"><span class="pre">set_inertia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inertia</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_inertia"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_inertia" title="Permalink to this definition"></a></dt>
+<dd><p>Set rotational inertia.
+Used in impedance control mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>inertia</strong> (<em>float</em>) – Inertia</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_damping">
+<span class="sig-name descname"><span class="pre">set_damping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">damping</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_damping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_damping" title="Permalink to this definition"></a></dt>
+<dd><p>Set rotational damping.
+Used in impedance control mode.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>damping</strong> (<em>float</em>) – Damping</p></li>
 </ul>
 </dd>
 </dl>
@@ -527,7 +405,7 @@ Used in speed control and position control (speed) modes.</p>
 <dd><p>Set rotational stiffness.
 Used in impedance control mode.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
 <li><p><strong>stiffness</strong> (<em>float</em>) – Stiffness</p></li>
@@ -542,7 +420,51 @@ Used in impedance control mode.</p>
 <dd><p>Set zero angle.
 Used in position control (speed), position control (direct), bang bang, and impedance control modes.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.realign_motor">
+<span class="sig-name descname"><span class="pre">realign_motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.realign_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.realign_motor" title="Permalink to this definition"></a></dt>
+<dd><p>Realign motor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.enable_motor">
+<span class="sig-name descname"><span class="pre">enable_motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.enable_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.enable_motor" title="Permalink to this definition"></a></dt>
+<dd><p>Enable motor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.disable_motor">
+<span class="sig-name descname"><span class="pre">disable_motor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.disable_motor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.disable_motor" title="Permalink to this definition"></a></dt>
+<dd><p>Disable motor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_match_other_position">
+<span class="sig-name descname"><span class="pre">set_match_other_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_match_other_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_match_other_position" title="Permalink to this definition"></a></dt>
+<dd><p>Set motor target position to current position of the other motor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
 </dd>
 </dl>
@@ -553,10 +475,92 @@ Used in position control (speed), position control (direct), bang bang, and impe
 <span class="sig-name descname"><span class="pre">unset_match_other_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.unset_match_other_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.unset_match_other_position" title="Permalink to this definition"></a></dt>
 <dd><p>Unset motor target position to current position of the other motor.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_callback">
+<span class="sig-name descname"><span class="pre">set_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cb_func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_callback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_callback" title="Permalink to this definition"></a></dt>
+<dd><p>Set callback function for when data from motors arrives.
+The data in the form of a dictionary will be pass to this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cb_func</strong> (<em>Callable</em><em>[</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>None</em><em>]</em>) – function with one argument</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.remove_callback">
+<span class="sig-name descname"><span class="pre">remove_callback</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.remove_callback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.remove_callback" title="Permalink to this definition"></a></dt>
+<dd><p>Remove callback function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.get_from_queue">
+<span class="sig-name descname"><span class="pre">get_from_queue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.get_from_queue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.get_from_queue" title="Permalink to this definition"></a></dt>
+<dd><p>Data from motors are put into a read queue by default.
+To get data from motors, either read from this queue or set a callback function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.get_pos">
+<span class="sig-name descname"><span class="pre">get_pos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.get_pos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.get_pos" title="Permalink to this definition"></a></dt>
+<dd><p>Get current pos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Current position in radians</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.get_speed">
+<span class="sig-name descname"><span class="pre">get_speed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.get_speed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.get_speed" title="Permalink to this definition"></a></dt>
+<dd><p>Get current speed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Current speed in rad/s</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.get_torque">
+<span class="sig-name descname"><span class="pre">get_torque</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.get_torque"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.get_torque" title="Permalink to this definition"></a></dt>
+<dd><p>Get current torque.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Current torque in N m</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.disconnect">
+<span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.disconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.disconnect" title="Permalink to this definition"></a></dt>
+<dd><p>Disconnect serial.</p>
 </dd></dl>
 
 </dd></dl>

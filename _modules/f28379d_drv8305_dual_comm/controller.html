@@ -26,11 +26,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> f28379d-drv8305-dual-comm
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            f28379d-drv8305-dual-comm
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -54,9 +58,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-      <li>f28379d_drv8305_dual_comm.controller</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">f28379d_drv8305_dual_comm.controller</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -89,7 +93,7 @@
 
 
 <div class="viewcode-block" id="Controller"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller">[docs]</a><span class="k">class</span> <span class="nc">Controller</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Communicate using serial with a f28379d used to control two motors through drv8305.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -174,11 +178,11 @@
 <div class="viewcode-block" id="Controller.set_control_mode"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_control_mode">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_control_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set motor control mode.</span>
 
 <span class="sd">        :param motor_no: 1 or 2</span>
-<span class="sd">        :param mode: Choose between speed control, position control (speed), position control (direct), bang ban control, and impedance control modes</span>
+<span class="sd">        :param mode: Choose between speed control, position control (speed), position control (direct), bang bang control, and impedance control modes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -203,7 +207,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">ControlMode</span><span class="o">.</span><span class="n">Bang_Bang</span>
                 <span class="k">case</span> <span class="s2">&quot;impedance control&quot;</span> <span class="o">|</span> <span class="s2">&quot;impedance&quot;</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">ControlMode</span><span class="o">.</span><span class="n">Impedance_Control</span>
-                <span class="k">case</span> <span class="k">_</span><span class="p">:</span>
+                <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
                     <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Invalid control mode.&quot;</span><span class="p">)</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid control mode.&quot;</span><span class="p">)</span>
 
@@ -219,7 +223,7 @@
 <div class="viewcode-block" id="Controller.set_max_torque"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_max_torque">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_max_torque</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">torque</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set maximum torque in N m.</span>
 <span class="sd">        Used in position control (speed), position control (direct), bang bang, and impedance control modes.</span>
 
@@ -232,7 +236,7 @@
 <div class="viewcode-block" id="Controller.set_speed"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_speed">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">speed</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set target speed.</span>
 <span class="sd">        Used in speed control mode.</span>
 
@@ -245,7 +249,7 @@
 <div class="viewcode-block" id="Controller.set_pos"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set target pos.</span>
 <span class="sd">        Used in position control (speed), position control (direct), bang bang, and impedance control modes.</span>
 
@@ -258,7 +262,7 @@
 <div class="viewcode-block" id="Controller.set_speed_p"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_speed_p">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_speed_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set P gain for speed control.</span>
 <span class="sd">        Used in speed control and position control (speed) modes.</span>
 
@@ -271,7 +275,7 @@
 <div class="viewcode-block" id="Controller.set_speed_i"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_speed_i">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_speed_i</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set I gain for speed control.</span>
 <span class="sd">        Used in speed control and position control (speed) modes.</span>
 
@@ -284,7 +288,7 @@
 <div class="viewcode-block" id="Controller.set_speed_d"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_speed_d">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_speed_d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set D gain for speed control.</span>
 <span class="sd">        Used in speed control and position control (speed) modes.</span>
 
@@ -297,7 +301,7 @@
 <div class="viewcode-block" id="Controller.set_hold_torque"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_hold_torque">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_hold_torque</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">torque</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set constant torque.</span>
 <span class="sd">        Used in torque control mode.</span>
 
@@ -310,7 +314,7 @@
 <div class="viewcode-block" id="Controller.set_pos_p"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_p">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_pos_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set P gain for position control (speed).</span>
 <span class="sd">        Used in position control (speed) mode.</span>
 
@@ -323,7 +327,7 @@
 <div class="viewcode-block" id="Controller.set_pos_i"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_i">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_pos_i</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set I gain for position control (speed).</span>
 <span class="sd">        Used in position control (speed) mode.</span>
 
@@ -336,7 +340,7 @@
 <div class="viewcode-block" id="Controller.set_pos_d"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_d">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_pos_d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set D gain for position control (speed).</span>
 <span class="sd">        Used in position control (speed) mode.</span>
 
@@ -349,7 +353,7 @@
 <div class="viewcode-block" id="Controller.set_max_speed"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_max_speed">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_max_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">speed</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set maximum target speed for position control.</span>
 <span class="sd">        Used in position control (speed) mode.</span>
 
@@ -362,7 +366,7 @@
 <div class="viewcode-block" id="Controller.set_pos_p_direct"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_p_direct">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_pos_p_direct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set P gain for position control (direct).</span>
 <span class="sd">        Used in position control (direct) mode.</span>
 
@@ -375,7 +379,7 @@
 <div class="viewcode-block" id="Controller.set_pos_i_direct"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_i_direct">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_pos_i_direct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set I gain for position control (direct).</span>
 <span class="sd">        Used in position control (direct) mode.</span>
 
@@ -388,7 +392,7 @@
 <div class="viewcode-block" id="Controller.set_pos_d_direct"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_d_direct">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_pos_d_direct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set D gain for position control (direct).</span>
 <span class="sd">        Used in position control (direct) mode.</span>
 
@@ -401,7 +405,7 @@
 <div class="viewcode-block" id="Controller.set_bang_bang_torque"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_bang_bang_torque">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_bang_bang_torque</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">torque</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set constant torque in bang-bang control.</span>
 <span class="sd">        Used in bang-bang control mode.</span>
 
@@ -414,7 +418,7 @@
 <div class="viewcode-block" id="Controller.set_bang_bang_deadband"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_bang_bang_deadband">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_bang_bang_deadband</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">deadband</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set deadband in radians in bang-bang control.</span>
 <span class="sd">        Used in bang-bang control mode.</span>
 
@@ -427,7 +431,7 @@
 <div class="viewcode-block" id="Controller.set_inertia"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_inertia">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_inertia</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">inertia</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set rotational inertia.</span>
 <span class="sd">        Used in impedance control mode.</span>
 
@@ -440,7 +444,7 @@
 <div class="viewcode-block" id="Controller.set_damping"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_damping">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_damping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">damping</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set rotational damping.</span>
 <span class="sd">        Used in impedance control mode.</span>
 
@@ -453,7 +457,7 @@
 <div class="viewcode-block" id="Controller.set_stiffness"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_stiffness">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_stiffness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">stiffness</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set rotational stiffness.</span>
 <span class="sd">        Used in impedance control mode.</span>
 
@@ -466,7 +470,7 @@
 <div class="viewcode-block" id="Controller.set_zero_angle"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_zero_angle">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_zero_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set zero angle.</span>
 <span class="sd">        Used in position control (speed), position control (direct), bang bang, and impedance control modes.</span>
 
@@ -478,7 +482,7 @@
 <div class="viewcode-block" id="Controller.realign_motor"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.realign_motor">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">realign_motor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Realign motor.</span>
 
 <span class="sd">        :param motor_no: 1 or 2</span>
@@ -489,7 +493,7 @@
 <div class="viewcode-block" id="Controller.enable_motor"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.enable_motor">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">enable_motor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Enable motor.</span>
 
 <span class="sd">        :param motor_no: 1 or 2</span>
@@ -500,7 +504,7 @@
 <div class="viewcode-block" id="Controller.disable_motor"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.disable_motor">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">disable_motor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Disable motor.</span>
 
 <span class="sd">        :param motor_no: 1 or 2</span>
@@ -511,7 +515,7 @@
 <div class="viewcode-block" id="Controller.set_match_other_position"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_match_other_position">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_match_other_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set motor target position to current position of the other motor.</span>
 
 <span class="sd">        :param motor_no: 1 or 2</span>
@@ -522,7 +526,7 @@
 <div class="viewcode-block" id="Controller.unset_match_other_position"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.unset_match_other_position">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">unset_match_other_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Unset motor target position to current position of the other motor.</span>
 
 <span class="sd">        :param motor_no: 1 or 2</span>
@@ -550,7 +554,7 @@
                 <span class="n">_</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_to_queue</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_read_deque</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_header</span><span class="p">,</span> <span class="n">unpacked_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
-            <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_on_motor_measurement_cb</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_on_motor_measurement_cb</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_on_motor_measurement_cb</span><span class="p">(</span>
                     <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_header</span><span class="p">,</span> <span class="n">unpacked_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
                 <span class="p">)</span>
@@ -564,7 +568,7 @@
         <span class="n">ser</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Controller.set_callback"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_callback">[docs]</a>    <span class="k">def</span> <span class="nf">set_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">dict</span><span class="p">],</span> <span class="kc">None</span><span class="p">]):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set callback function for when data from motors arrives.</span>
 <span class="sd">        The data in the form of a dictionary will be pass to this function.</span>
 
@@ -576,7 +580,7 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.remove_callback"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.remove_callback">[docs]</a>    <span class="k">def</span> <span class="nf">remove_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove callback function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_on_motor_measurement_cb</span> <span class="o">=</span> <span class="kc">None</span>
@@ -588,7 +592,7 @@
 <div class="viewcode-block" id="Controller.get_from_queue"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.get_from_queue">[docs]</a>    <span class="nd">@if_no_cb_assigned</span>
     <span class="nd">@wait_for_data</span>
     <span class="k">def</span> <span class="nf">get_from_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Data from motors are put into a read queue by default.</span>
 <span class="sd">        To get data from motors, either read from this queue or set a callback function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -599,7 +603,7 @@
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="nd">@wait_for_data</span>
     <span class="k">def</span> <span class="nf">get_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get current pos.</span>
 
 <span class="sd">        :param motor_no: 1 or 2</span>
@@ -613,7 +617,7 @@
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="nd">@wait_for_data</span>
     <span class="k">def</span> <span class="nf">get_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get current speed.</span>
 
 <span class="sd">        :param motor_no: 1 or 2</span>
@@ -627,7 +631,7 @@
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="nd">@wait_for_data</span>
     <span class="k">def</span> <span class="nf">get_torque</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get current torque.</span>
 
 <span class="sd">        :param motor_no: 1 or 2</span>
@@ -637,7 +641,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_deque</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">key</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Controller.disconnect"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.disconnect">[docs]</a>    <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Disconnect serial.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_stop_serial</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
