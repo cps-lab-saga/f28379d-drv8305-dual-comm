@@ -5,7 +5,7 @@ description = ""
 authors = ["wenliangyeoh <wlyeoh@cc.saga-u.ac.jp>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.8 <3.12"
 pyserial = "^3.5"
 crc = "^1.2.0"
 
