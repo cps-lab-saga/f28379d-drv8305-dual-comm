@@ -110,7 +110,7 @@ class Controller:
         Set motor control mode.
 
         :param motor_no: 1 or 2
-        :param mode: Choose between speed control, position control (speed), position control (direct), bang ban control, and impedance control modes
+        :param mode: Choose between speed control, position control (speed), position control (direct), bang bang control, and impedance control modes
         """
 
         if isinstance(mode, str):
