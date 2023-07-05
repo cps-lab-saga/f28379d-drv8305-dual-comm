@@ -466,7 +466,7 @@ class Controller:
     @if_motor_no_is_valid
     def set_friction_torque(self, motor_no: int, torque: float):
         """
-        Constant torque value for friction compensation.
+        Torque value for friction compensation.
 
         :param motor_no: 1 or 2
         :param torque: Friction compensation torque in N m
@@ -478,7 +478,7 @@ class Controller:
     @if_motor_no_is_valid
     def set_friction_vel_tolerance(self, motor_no: int, vel_tolerance: float):
         """
-        Velocity dependent coefficient for friction compensation.
+        Velocity tolerance for friction compensation.
 
         :param motor_no: 1 or 2
         :param vel_tolerance: Velocity in rad s-1
