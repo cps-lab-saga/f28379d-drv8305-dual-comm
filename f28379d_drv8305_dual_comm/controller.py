@@ -462,6 +462,30 @@ class Controller:
         self._write_queue.put((b"\xF4", motor_no, 0))
         return self
 
+    @log_command
+    @if_motor_no_is_valid
+    def set_friction_torque(self, motor_no: int, torque: float):
+        """
+        Constant torque value for friction compensation.
+
+        :param motor_no: 1 or 2
+        :param torque: Friction compensation torque in N m
+        """
+        self._write_queue.put((b"\xF5", motor_no, torque))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def set_friction_vel_tolerance(self, motor_no: int, vel_tolerance: float):
+        """
+        Velocity dependent coefficient for friction compensation.
+
+        :param motor_no: 1 or 2
+        :param vel_tolerance: Velocity in rad s-1
+        """
+        self._write_queue.put((b"\xF6", motor_no, vel_tolerance))
+        return self
+
     def _start_serial(self):
         self._thread = threading.Thread(target=self._read_serial_data, daemon=True)
         self._thread.start()
