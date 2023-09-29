@@ -259,6 +259,110 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x04</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">pos</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
+<div class="viewcode-block" id="Controller.set_current_measure_cutoff_freq"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_current_measure_cutoff_freq">[docs]</a>    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">set_current_measure_cutoff_freq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the cutoff frequency for iq current filter.</span>
+<span class="sd">        Used when estimating motor torque from phase currents.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param freq: Cutoff frequency in Hz</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x05</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Controller.set_torque_sensor_cutoff_freq"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_torque_sensor_cutoff_freq">[docs]</a>    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">set_torque_sensor_cutoff_freq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the cutoff frequency for torque sensor filter.</span>
+<span class="sd">        Used when measuring torque from torque sensor.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param freq: Cutoff frequency in Hz</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x06</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">set_torque_sensor_scaling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gradient</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the gradient of torque sensor calibration curve.</span>
+<span class="sd">        Used for calibrating torque sensor.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gradient: gradient of torque sensor calibration line</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x07</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gradient</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+<div class="viewcode-block" id="Controller.set_torque_sensor_scaling"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_torque_sensor_scaling">[docs]</a>    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">set_torque_sensor_scaling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the offset of torque sensor calibration curve.</span>
+<span class="sd">        Used for calibrating torque sensor.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param offset: offset of torque sensor calibration line</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x08</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">offset</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Controller.set_direct_torque_p"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_direct_torque_p">[docs]</a>    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">set_direct_torque_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set P gain for direct torque control.</span>
+<span class="sd">        Used to regulate motor torque to achieve sensor torque target.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gain: Proportional gain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x09</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Controller.set_direct_torque_i"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_direct_torque_i">[docs]</a>    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">set_direct_torque_i</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set I gain for direct torque control.</span>
+<span class="sd">        Used to regulate motor torque to achieve sensor torque target.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gain: Integral gain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x0A</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Controller.set_direct_torque_d"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_direct_torque_d">[docs]</a>    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">set_direct_torque_d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set D gain for direct torque control.</span>
+<span class="sd">        Used to regulate motor torque to achieve sensor torque target.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param gain: Derivative gain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x0B</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Controller.set_direct_torque_d_cutoff_freq"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_direct_torque_d_cutoff_freq">[docs]</a>    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">set_direct_torque_d_cutoff_freq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the derivative filter cutoff frequency (Hz) for direct torque control.</span>
+<span class="sd">        Used to regulate motor torque to achieve sensor torque target.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param freq: Cutoff frequency in Hz</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x0C</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
 <div class="viewcode-block" id="Controller.set_speed_p"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_speed_p">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_speed_p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -296,6 +400,19 @@
 <span class="sd">        :param gain: Derivative gain</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x13</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Controller.set_speed_d_cutoff_freq"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_speed_d_cutoff_freq">[docs]</a>    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">set_speed_d_cutoff_freq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the derivative filter cutoff frequency (Hz) for speed control.</span>
+<span class="sd">        Used in speed control and position control (speed) modes.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param freq: Cutoff frequency in Hz</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x14</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_hold_torque"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_hold_torque">[docs]</a>    <span class="nd">@log_command</span>
@@ -350,6 +467,19 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x33</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
+<div class="viewcode-block" id="Controller.set_pos_d_cutoff_freq"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_d_cutoff_freq">[docs]</a>    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">set_pos_d_cutoff_freq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the derivative filter cutoff frequency (Hz) for position control (speed).</span>
+<span class="sd">        Used in position control (speed) mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param freq: Cutoff frequency in Hz</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x34</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
 <div class="viewcode-block" id="Controller.set_max_speed"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_max_speed">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_max_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">speed</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -360,7 +490,7 @@
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param speed: Rotational speed in rad/s (max speed = 30 rad/s)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x34</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">speed</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x35</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">speed</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_pos_p_direct"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_p_direct">[docs]</a>    <span class="nd">@log_command</span>
@@ -400,6 +530,19 @@
 <span class="sd">        :param gain: Derivative gain</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x43</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gain</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Controller.set_pos_d_direct_cutoff_freq"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_pos_d_direct_cutoff_freq">[docs]</a>    <span class="nd">@log_command</span>
+    <span class="nd">@if_motor_no_is_valid</span>
+    <span class="k">def</span> <span class="nf">set_pos_d_direct_cutoff_freq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the derivative filter cutoff frequency (Hz) for position control (direct).</span>
+<span class="sd">        Used in position control (speed) mode.</span>
+
+<span class="sd">        :param motor_no: 1 or 2</span>
+<span class="sd">        :param freq: Cutoff frequency in Hz</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x44</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Controller.set_bang_bang_torque"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_bang_bang_torque">[docs]</a>    <span class="nd">@log_command</span>
