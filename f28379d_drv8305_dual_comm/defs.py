@@ -5,12 +5,14 @@ data_variables = (
     "motor1_pos",
     "motor1_speed",
     "motor1_torque",
+    "motor1_torque_sense",
     "motor2_pos",
     "motor2_speed",
     "motor2_torque",
+    "motor2_torque_sense",
 )
 
-_read_format = ">cfffffffc"
+_read_format = ">cfffffffffc"
 _write_format = ">Bf"
 
 sampling_rate = 100
