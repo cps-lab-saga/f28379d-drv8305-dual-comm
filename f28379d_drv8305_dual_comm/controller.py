@@ -189,6 +189,110 @@ class Controller:
 
     @log_command
     @if_motor_no_is_valid
+    def set_current_measure_cutoff_freq(self, motor_no: int, freq: float):
+        """
+        Set the cutoff frequency for iq current filter.
+        Used when estimating motor torque from phase currents.
+
+        :param motor_no: 1 or 2
+        :param freq: Cutoff frequency in Hz
+        """
+        self._write_queue.put((b"\x05", motor_no, freq))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def set_torque_sensor_cutoff_freq(self, motor_no: int, freq: float):
+        """
+        Set the cutoff frequency for torque sensor filter.
+        Used when measuring torque from torque sensor.
+
+        :param motor_no: 1 or 2
+        :param freq: Cutoff frequency in Hz
+        """
+        self._write_queue.put((b"\x06", motor_no, freq))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def set_torque_sensor_scaling(self, motor_no: int, gradient: float):
+        """
+        Set the gradient of torque sensor calibration curve.
+        Used for calibrating torque sensor.
+
+        :param motor_no: 1 or 2
+        :param gradient: gradient of torque sensor calibration line
+        """
+        self._write_queue.put((b"\x07", motor_no, gradient))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def set_torque_sensor_scaling(self, motor_no: int, offset: float):
+        """
+        Set the offset of torque sensor calibration curve.
+        Used for calibrating torque sensor.
+
+        :param motor_no: 1 or 2
+        :param offset: offset of torque sensor calibration line
+        """
+        self._write_queue.put((b"\x08", motor_no, offset))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def set_direct_torque_p(self, motor_no: int, gain: float):
+        """
+        Set P gain for direct torque control.
+        Used to regulate motor torque to achieve sensor torque target.
+
+        :param motor_no: 1 or 2
+        :param gain: Proportional gain
+        """
+        self._write_queue.put((b"\x09", motor_no, gain))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def set_direct_torque_i(self, motor_no: int, gain: float):
+        """
+        Set I gain for direct torque control.
+        Used to regulate motor torque to achieve sensor torque target.
+
+        :param motor_no: 1 or 2
+        :param gain: Integral gain
+        """
+        self._write_queue.put((b"\x0A", motor_no, gain))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def set_direct_torque_d(self, motor_no: int, gain: float):
+        """
+        Set D gain for direct torque control.
+        Used to regulate motor torque to achieve sensor torque target.
+
+        :param motor_no: 1 or 2
+        :param gain: Derivative gain
+        """
+        self._write_queue.put((b"\x0B", motor_no, gain))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def set_direct_torque_d_cutoff_freq(self, motor_no: int, freq: float):
+        """
+        Set the derivative filter cutoff frequency (Hz) for direct torque control.
+        Used to regulate motor torque to achieve sensor torque target.
+
+        :param motor_no: 1 or 2
+        :param freq: Cutoff frequency in Hz
+        """
+        self._write_queue.put((b"\x0C", motor_no, freq))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
     def set_speed_p(self, motor_no: int, gain: float):
         """
         Set P gain for speed control.
@@ -224,6 +328,19 @@ class Controller:
         :param gain: Derivative gain
         """
         self._write_queue.put((b"\x13", motor_no, gain))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def set_speed_d_cutoff_freq(self, motor_no: int, freq: float):
+        """
+        Set the derivative filter cutoff frequency (Hz) for speed control.
+        Used in speed control and position control (speed) modes.
+
+        :param motor_no: 1 or 2
+        :param freq: Cutoff frequency in Hz
+        """
+        self._write_queue.put((b"\x14", motor_no, freq))
         return self
 
     @log_command
@@ -280,6 +397,19 @@ class Controller:
 
     @log_command
     @if_motor_no_is_valid
+    def set_pos_d_cutoff_freq(self, motor_no: int, freq: float):
+        """
+        Set the derivative filter cutoff frequency (Hz) for position control (speed).
+        Used in position control (speed) mode.
+
+        :param motor_no: 1 or 2
+        :param freq: Cutoff frequency in Hz
+        """
+        self._write_queue.put((b"\x34", motor_no, freq))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
     def set_max_speed(self, motor_no: int, speed: float):
         """
         Set maximum target speed for position control.
@@ -288,7 +418,7 @@ class Controller:
         :param motor_no: 1 or 2
         :param speed: Rotational speed in rad/s (max speed = 30 rad/s)
         """
-        self._write_queue.put((b"\x34", motor_no, speed))
+        self._write_queue.put((b"\x35", motor_no, speed))
         return self
 
     @log_command
@@ -328,6 +458,19 @@ class Controller:
         :param gain: Derivative gain
         """
         self._write_queue.put((b"\x43", motor_no, gain))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def set_pos_d_direct_cutoff_freq(self, motor_no: int, freq: float):
+        """
+        Set the derivative filter cutoff frequency (Hz) for position control (direct).
+        Used in position control (speed) mode.
+
+        :param motor_no: 1 or 2
+        :param freq: Cutoff frequency in Hz
+        """
+        self._write_queue.put((b"\x44", motor_no, freq))
         return self
 
     @log_command
