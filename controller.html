@@ -53,6 +53,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_current_measure_cutoff_freq"><code class="docutils literal notranslate"><span class="pre">Controller.set_current_measure_cutoff_freq()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_torque_sensor_cutoff_freq"><code class="docutils literal notranslate"><span class="pre">Controller.set_torque_sensor_cutoff_freq()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_torque_sensor_scaling"><code class="docutils literal notranslate"><span class="pre">Controller.set_torque_sensor_scaling()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_torque_sensor_offset"><code class="docutils literal notranslate"><span class="pre">Controller.set_torque_sensor_offset()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_direct_torque_p"><code class="docutils literal notranslate"><span class="pre">Controller.set_direct_torque_p()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_direct_torque_i"><code class="docutils literal notranslate"><span class="pre">Controller.set_direct_torque_i()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_direct_torque_d"><code class="docutils literal notranslate"><span class="pre">Controller.set_direct_torque_d()</span></code></a></li>
@@ -218,7 +219,22 @@ Used when measuring torque from torque sensor.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_torque_sensor_scaling">
-<span class="sig-name descname"><span class="pre">set_torque_sensor_scaling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_torque_sensor_scaling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_torque_sensor_scaling" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">set_torque_sensor_scaling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gradient</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_torque_sensor_scaling"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_torque_sensor_scaling" title="Permalink to this definition"></a></dt>
+<dd><p>Set the gradient of torque sensor calibration curve.
+Used for calibrating torque sensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
+<li><p><strong>gradient</strong> (<em>float</em>) – gradient of torque sensor calibration line</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_torque_sensor_offset">
+<span class="sig-name descname"><span class="pre">set_torque_sensor_offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_torque_sensor_offset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_torque_sensor_offset" title="Permalink to this definition"></a></dt>
 <dd><p>Set the offset of torque sensor calibration curve.
 Used for calibrating torque sensor.</p>
 <dl class="field-list simple">

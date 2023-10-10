@@ -285,7 +285,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x06</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
-    <span class="nd">@log_command</span>
+<div class="viewcode-block" id="Controller.set_torque_sensor_scaling"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_torque_sensor_scaling">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
     <span class="k">def</span> <span class="nf">set_torque_sensor_scaling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">gradient</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -296,11 +296,11 @@
 <span class="sd">        :param gradient: gradient of torque sensor calibration line</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="sa">b</span><span class="s2">&quot;</span><span class="se">\x07</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">,</span> <span class="n">gradient</span><span class="p">))</span>
-        <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
 
-<div class="viewcode-block" id="Controller.set_torque_sensor_scaling"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_torque_sensor_scaling">[docs]</a>    <span class="nd">@log_command</span>
+<div class="viewcode-block" id="Controller.set_torque_sensor_offset"><a class="viewcode-back" href="../../controller.html#f28379d_drv8305_dual_comm.Controller.set_torque_sensor_offset">[docs]</a>    <span class="nd">@log_command</span>
     <span class="nd">@if_motor_no_is_valid</span>
-    <span class="k">def</span> <span class="nf">set_torque_sensor_scaling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_torque_sensor_offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the offset of torque sensor calibration curve.</span>
 <span class="sd">        Used for calibrating torque sensor.</span>
