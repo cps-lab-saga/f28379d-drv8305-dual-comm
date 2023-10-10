@@ -228,7 +228,7 @@ class Controller:
 
     @log_command
     @if_motor_no_is_valid
-    def set_torque_sensor_scaling(self, motor_no: int, offset: float):
+    def set_torque_sensor_offset(self, motor_no: int, offset: float):
         """
         Set the offset of torque sensor calibration curve.
         Used for calibrating torque sensor.
