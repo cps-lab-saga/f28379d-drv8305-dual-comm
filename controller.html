@@ -85,6 +85,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.unset_match_other_position"><code class="docutils literal notranslate"><span class="pre">Controller.unset_match_other_position()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_friction_torque"><code class="docutils literal notranslate"><span class="pre">Controller.set_friction_torque()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_friction_vel_tolerance"><code class="docutils literal notranslate"><span class="pre">Controller.set_friction_vel_tolerance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_direct_torque_on"><code class="docutils literal notranslate"><span class="pre">Controller.set_direct_torque_on()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_direct_torque_off"><code class="docutils literal notranslate"><span class="pre">Controller.set_direct_torque_off()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.set_callback"><code class="docutils literal notranslate"><span class="pre">Controller.set_callback()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.remove_callback"><code class="docutils literal notranslate"><span class="pre">Controller.remove_callback()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#f28379d_drv8305_dual_comm.Controller.get_from_queue"><code class="docutils literal notranslate"><span class="pre">Controller.get_from_queue()</span></code></a></li>
@@ -683,6 +685,30 @@ Used in position control (speed), position control (direct), bang bang, and impe
 <li><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p></li>
 <li><p><strong>vel_tolerance</strong> (<em>float</em>) – Velocity in rad s-1</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_direct_torque_on">
+<span class="sig-name descname"><span class="pre">set_direct_torque_on</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_direct_torque_on"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_direct_torque_on" title="Permalink to this definition"></a></dt>
+<dd><p>Set direct torque control on.
+(Adjust motor torque to target a torque sensor value)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="f28379d_drv8305_dual_comm.Controller.set_direct_torque_off">
+<span class="sig-name descname"><span class="pre">set_direct_torque_off</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">motor_no</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/f28379d_drv8305_dual_comm/controller.html#Controller.set_direct_torque_off"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#f28379d_drv8305_dual_comm.Controller.set_direct_torque_off" title="Permalink to this definition"></a></dt>
+<dd><p>Set direct torque control off.
+(Adjust motor torque to target a torque sensor value)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>motor_no</strong> (<em>int</em>) – 1 or 2</p>
 </dd>
 </dl>
 </dd></dl>
