@@ -629,6 +629,30 @@ class Controller:
         self._write_queue.put((b"\xF6", motor_no, vel_tolerance))
         return self
 
+    @log_command
+    @if_motor_no_is_valid
+    def set_direct_torque_on(self, motor_no: int):
+        """
+        Set direct torque control on.
+        (Adjust motor torque to target a torque sensor value)
+
+        :param motor_no: 1 or 2
+        """
+        self._write_queue.put((b"\xF7", motor_no, 1))
+        return self
+
+    @log_command
+    @if_motor_no_is_valid
+    def set_direct_torque_off(self, motor_no: int):
+        """
+        Set direct torque control off.
+        (Adjust motor torque to target a torque sensor value)
+
+        :param motor_no: 1 or 2
+        """
+        self._write_queue.put((b"\xF7", motor_no, 0))
+        return self
+
     def _start_serial(self):
         self._thread = threading.Thread(target=self._read_serial_data, daemon=True)
         self._thread.start()
