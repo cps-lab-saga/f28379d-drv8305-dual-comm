@@ -207,6 +207,10 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">ControlMode</span><span class="o">.</span><span class="n">Bang_Bang</span>
                 <span class="k">case</span> <span class="s2">&quot;impedance control&quot;</span> <span class="o">|</span> <span class="s2">&quot;impedance&quot;</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="n">ControlMode</span><span class="o">.</span><span class="n">Impedance_Control</span>
+                <span class="k">case</span> <span class="s2">&quot;impedance control with load&quot;</span> <span class="o">|</span> <span class="s2">&quot;impedance with load&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_selected_control_mode</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="n">ControlMode</span><span class="o">.</span><span class="n">Impedance_Control_With_Load</span>
+                    <span class="p">)</span>
                 <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
                     <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Invalid control mode.&quot;</span><span class="p">)</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid control mode.&quot;</span><span class="p">)</span>
@@ -420,7 +424,7 @@
     <span class="k">def</span> <span class="nf">set_hold_torque</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">torque</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set constant torque.</span>
-<span class="sd">        Used in torque control mode.</span>
+<span class="sd">        Used in torque control mode and impedance control with torque mode.</span>
 
 <span class="sd">        :param motor_no: 1 or 2</span>
 <span class="sd">        :param torque: Torque in N m (max torque = 4.3 N m)</span>
