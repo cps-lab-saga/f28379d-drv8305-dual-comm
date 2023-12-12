@@ -135,6 +135,10 @@ class Controller:
                     self._selected_control_mode = ControlMode.Bang_Bang
                 case "impedance control" | "impedance":
                     self._selected_control_mode = ControlMode.Impedance_Control
+                case "impedance control with load" | "impedance with load":
+                    self._selected_control_mode = (
+                        ControlMode.Impedance_Control_With_Load
+                    )
                 case _:
                     logging.error("Invalid control mode.")
                     raise ValueError("Invalid control mode.")
@@ -348,7 +352,7 @@ class Controller:
     def set_hold_torque(self, motor_no: int, torque: float):
         """
         Set constant torque.
-        Used in torque control mode.
+        Used in torque control mode and impedance control with torque mode.
 
         :param motor_no: 1 or 2
         :param torque: Torque in N m (max torque = 4.3 N m)

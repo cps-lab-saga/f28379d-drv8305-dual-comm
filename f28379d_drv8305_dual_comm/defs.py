@@ -25,3 +25,4 @@ class ControlMode(IntEnum):
     Position_Control_Direct = 3
     Bang_Bang = 4
     Impedance_Control = 5
+    Impedance_Control_With_Load = 6
